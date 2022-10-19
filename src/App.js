@@ -9,7 +9,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setFreeItems(data))
       .catch((e) => console.log(e));
-  });
+  }, []);
   return (
     <div className="App">
       <BoardMain items={freeItems} />
