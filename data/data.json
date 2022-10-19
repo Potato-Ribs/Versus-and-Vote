@@ -1,0 +1,50 @@
+{
+  "vote": [
+    {
+      "id": 1,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14
+    },
+    {
+      "id": 2,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14
+    },
+    {
+      "id": 3,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14
+    },
+    {
+      "id": 4,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14
+    },
+    {
+      "id": 5,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14
+    }
+  ],
+  "free": []
+}
