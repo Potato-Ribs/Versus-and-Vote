@@ -5,13 +5,22 @@ const StyledAds = styled.div`
   height: 100vh;
   background-color: tomato;
   margin-left: 40px;
+
+  .commercial {
+    width: 180px;
+    height: 320px;
+    background-color: gray;
+    :not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 const Ads = () => {
   return (
     <StyledAds className="Ads">
-      <div className="commercial"></div>
-      <div className="commercial"></div>
+      <div className="commercial">광고</div>
+      <div className="commercial">광고</div>
     </StyledAds>
   );
 };
