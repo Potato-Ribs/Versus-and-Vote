@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import styled from "styled-components";
 
 const StyledBoard = styled.div`
@@ -26,18 +28,27 @@ const StyledBoard = styled.div`
       padding-top: 1rem;
     }
     .item-detail {
+      font-size: 0.875rem;
       margin-bottom: 0.5rem;
       display: flex;
       justify-content: space-between;
     }
     .about-author {
-      font-size: 0.875rem;
       display: flex;
       align-items: center;
     }
     .author-avatar {
       width: 20px;
       margin-right: 0.5rem;
+    }
+    .about-item {
+      display: flex;
+    }
+    .icon {
+      margin: 0 3px;
+    }
+    .item-comments {
+      margin-left: 8px;
     }
     .item-title {
       margin: 0;
@@ -66,7 +77,17 @@ const BoardMain = ({ items }) => {
                 {`${item.author} · ${item.createdAt}`}
               </div>
               <div className="about-item">
-                {`${item.likes} ${item.comments}`}
+                <div className="item-likes">
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={regular("thumbs-up")}
+                  />
+                  {item.likes}
+                </div>
+                <div className="item-comments">
+                  <FontAwesomeIcon className="icon" icon={regular("comment")} />
+                  {item.comments}
+                </div>
               </div>
             </div>
             <h3 className="item-title">{item.title}</h3>
