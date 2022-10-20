@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import Ads from "../components/Ads";
+import Aside from "../components/Aside";
 import BoardMain from "../components/BoardMain";
 import Header from "../components/header/Header";
 
@@ -34,7 +35,7 @@ function Home({ isDark, setIsDark, freeItems, setFreeItems }) {
     <Container>
       <Header isDark={isDark} setIsDark={setIsDark} />
       <Main>
-        <Ads />
+        <Aside />
         <BoardMain items={freeItems} />
         <BoardMain items={freeItems} />
         <Ads />
