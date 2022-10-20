@@ -4,7 +4,6 @@ const StyledAds = styled.div`
   width: 180px;
   height: 100vh;
   background-color: tomato;
-  margin-left: 40px;
 
   .commercial {
     width: 180px;
