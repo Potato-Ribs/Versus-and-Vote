@@ -48,11 +48,11 @@
   ],
   "free": [],
   "popularTags": [
-    ["java", 40],
-    ["javascript", 29],
-    ["spring", 27],
-    ["springboot", 27],
-    ["react", 22]
+    { "name": "java", "point": 40 },
+    { "name": "javascript", "point": 29 },
+    { "name": "spring", "point": 27 },
+    { "name": "springboot", "point": 27 },
+    { "name": "react", "point": 22 }
   ],
   "userRank": [
     {

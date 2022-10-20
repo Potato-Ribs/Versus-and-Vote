@@ -120,8 +120,8 @@ function Aside() {
         <ul>
           {popularTags.map((tag) => (
             <li>
-              <span>{`#${tag[0]}`}</span>
-              <span>{`${tag[1]}`}</span>
+              <span>{`#${tag.name}`}</span>
+              <span>{`${tag.point}`}</span>
             </li>
           ))}
         </ul>
