@@ -32,7 +32,7 @@ function Home({ isDark, setIsDark, freeItems, setFreeItems }) {
 
   return (
     <Container>
-      <Header />
+      <Header isDark={isDark} setIsDark={setIsDark} />
       <Main>
         <Ads />
         <BoardMain items={freeItems} />
