@@ -25,7 +25,7 @@ const Main = styled.main`
 
 function Home({ freeItems, setFreeItems }) {
   useEffect(() => {
-    fetch("http://localhost:3001/vote")
+    fetch("http://localhost:3001/free")
       .then((res) => res.json())
       .then((data) => setFreeItems(data))
       .catch((e) => console.log(e));
