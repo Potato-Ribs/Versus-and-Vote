@@ -23,7 +23,7 @@ const Main = styled.main`
   align-items: center;
 `;
 
-function Home({ isDark, setIsDark, freeItems, setFreeItems }) {
+function Home({ freeItems, setFreeItems }) {
   useEffect(() => {
     fetch("http://localhost:3001/vote")
       .then((res) => res.json())
@@ -33,7 +33,7 @@ function Home({ isDark, setIsDark, freeItems, setFreeItems }) {
 
   return (
     <Container>
-      <Header isDark={isDark} setIsDark={setIsDark} />
+      <Header />
       <Main>
         <Aside />
         <BoardMain items={freeItems} />

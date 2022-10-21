@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { click } from "../../app/features/isDarkSlice";
 
 const Toggle = styled.button`
   font-size: 24px;
@@ -9,11 +10,12 @@ const Toggle = styled.button`
   background-color: ${(props) => props.theme.bgColor};
 `;
 
-function DarkModeBtn({ isDark, setIsDark }) {
+function DarkModeBtn() {
+  const dispatch = useDispatch();
+  const isDark = useSelector((state) => state.isDark.value);
+
   return (
-    <Toggle onClick={() => setIsDark((prev) => !prev)}>
-      {isDark ? "☀️" : "🌙"}
-    </Toggle>
+    <Toggle onClick={() => dispatch(click())}>{isDark ? "☀️" : "🌙"}</Toggle>
   );
 }
 
