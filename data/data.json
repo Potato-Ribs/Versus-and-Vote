@@ -46,5 +46,39 @@
       "comments": 14
     }
   ],
-  "free": []
+  "free": [],
+  "popularTags": [
+    { "name": "java", "point": 40 },
+    { "name": "javascript", "point": 29 },
+    { "name": "spring", "point": 27 },
+    { "name": "springboot", "point": 27 },
+    { "name": "react", "point": 22 }
+  ],
+  "userRank": [
+    {
+      "avatar": "https://okky.kr/profile/2022/1656141310703.jpeg",
+      "user": "고등어조림",
+      "point": 202
+    },
+    {
+      "avatar": "https://www.gravatar.com/avatar/8a540d3cdd9ad16fd9baf15adb5bdd6d?d=identicon&s=96",
+      "user": "제운",
+      "point": 99
+    },
+    {
+      "avatar": "https://okky.kr/profile/2022/1664257447247.png",
+      "user": "곰뭉이",
+      "point": 87
+    },
+    {
+      "avatar": "https://okky.kr/profile/2021/1639580399210.png",
+      "user": "kenu",
+      "point": 84
+    },
+    {
+      "avatar": "https://www.gravatar.com/avatar/9dc3b207ff6f5ba042e85c4b522936e2?d=identicon&s=96",
+      "user": "leemong77",
+      "point": 83
+    }
+  ]
 }

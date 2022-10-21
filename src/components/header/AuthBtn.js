@@ -13,11 +13,7 @@ const LoginBtn = styled.button`
   border-radius: 20px;
 `;
 
-const JoinBtn = styled.button`
-  height: 40px;
-  width: 80px;
-  border: 1px solid blue;
-  border-radius: 20px;
+const JoinBtn = styled(LoginBtn)`
   background-color: blue;
   color: white;
 `;

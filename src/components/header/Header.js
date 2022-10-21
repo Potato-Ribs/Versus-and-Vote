@@ -27,7 +27,7 @@ const Ul = styled.ul`
 
 const Li = styled.li``;
 
-function Header() {
+function Header({ isDark, setIsDark }) {
   return (
     <Container>
       <Nav>
@@ -40,7 +40,7 @@ function Header() {
       </Nav>
       <Search />
       <AuthBtn />
-      <DarkModeBtn />
+      <DarkModeBtn isDark={isDark} setIsDark={setIsDark} />
     </Container>
   );
 }
