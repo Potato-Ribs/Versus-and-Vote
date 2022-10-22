@@ -16,15 +16,18 @@ const StyledDiv = styled.div`
       background: black;
       height: 1px;
     }
+    ::after {
+      flex-grow: ${((props) => props.textPosition === "left" && 30) || 1};
+    }
   }
   .line-text {
     background-color: white;
     padding: 5px;
   }
 `;
-const TextWithLines = ({ text }) => {
+const TextWithLines = ({ text, textPosition }) => {
   return (
-    <StyledDiv className="TextWithLines">
+    <StyledDiv className="TextWithLines" textPosition={textPosition}>
       <div className="line">
         <span className="line-text">{text}</span>
       </div>
