@@ -190,7 +190,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 2,
@@ -200,7 +201,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 3,
@@ -210,7 +212,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 4,
@@ -220,7 +223,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 5,
@@ -230,7 +234,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 6,
@@ -240,7 +245,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 7,
@@ -250,7 +256,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 8,
@@ -260,7 +267,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 9,
@@ -270,7 +278,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 10,
@@ -280,7 +289,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 11,
@@ -290,7 +300,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 12,
@@ -300,7 +311,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 13,
@@ -310,7 +322,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 14,
@@ -320,7 +333,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 15,
@@ -330,7 +344,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 16,
@@ -340,7 +355,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 17,
@@ -350,7 +366,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 18,
@@ -360,7 +377,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 19,
@@ -370,7 +388,8 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     },
     {
       "id": 20,
@@ -380,7 +399,228 @@
       "createdAt": "약 2개월 전",
       "likes": 25,
       "comments": 14,
-      "tags": ["컴퓨터과학", "추천도서"]
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 21,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 22,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 23,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 24,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 25,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 26,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 27,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 28,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 29,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 30,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 31,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 32,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 33,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 34,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 35,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 36,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 37,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 38,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 39,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
+    },
+    {
+      "id": 40,
+      "title": "컴퓨터과학의 역사가 궁금하신 분들을 위한 추천도서",
+      "author": "운체조교",
+      "authorAvatar": "https://www.gravatar.com/avatar/9a316994cda85c56cd4f0c833ec511b6?d=identicon&s=96",
+      "createdAt": "약 2개월 전",
+      "likes": 25,
+      "comments": 14,
+      "tags": ["컴퓨터과학", "추천도서"],
+      "category": "팁"
     }
   ],
   "popularTags": [
