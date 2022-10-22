@@ -23,14 +23,7 @@ const Main = styled.main`
   align-items: center;
 `;
 
-function Home({ freeItems, setFreeItems }) {
-  useEffect(() => {
-    fetch("http://localhost:3001/free")
-      .then((res) => res.json())
-      .then((data) => setFreeItems(data))
-      .catch((e) => console.log(e));
-  }, []);
-
+function Home({ freeItems }) {
   return (
     <Container>
       <Header />
