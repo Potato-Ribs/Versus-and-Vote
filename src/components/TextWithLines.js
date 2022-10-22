@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
+  display: flex;
+  width: 100%;
   .line {
     display: flex;
     flex-basis: 100%;
@@ -22,7 +24,7 @@ const StyledDiv = styled.div`
 `;
 const TextWithLines = ({ text }) => {
   return (
-    <StyledDiv>
+    <StyledDiv className="TextWithLines">
       <div className="line">
         <span className="line-text">{text}</span>
       </div>
