@@ -20,7 +20,6 @@ const Main = styled.main`
   width: 100vw;
   display: flex;
   justify-content: space-around;
-  align-items: center;
 `;
 
 function Home({ freeItems }) {
