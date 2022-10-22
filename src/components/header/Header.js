@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import AuthBtn from "./AuthBtn";
 import DarkModeBtn from "./DarkModeBtn";
 import Search from "./Search";
@@ -31,7 +32,9 @@ function Header() {
   return (
     <Container>
       <Nav>
-        <HomeBtn>GoHome</HomeBtn>
+        <Link to="/">
+          <HomeBtn>GoHome</HomeBtn>
+        </Link>
         <Ul>
           <Li>Screen 1</Li>
           <Li>Screen 2</Li>
