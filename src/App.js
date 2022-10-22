@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
+import Board from "./pages/Board";
 
 function App() {
   const isDark = useSelector((state) => state.isDark.value);
@@ -17,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
-          {/* <Route path="/board" element={<Board freeItems={freeItems} />} /> */}
+          <Route path="/board" element={<Board />} />
         </Routes>
       </Router>
     </ThemeProvider>

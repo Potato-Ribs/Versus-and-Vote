@@ -36,7 +36,9 @@ function Header() {
           <HomeBtn>GoHome</HomeBtn>
         </Link>
         <Ul>
-          <Li>Screen 1</Li>
+          <Link to="/board">
+            <Li>Screen 1</Li>
+          </Link>
           <Li>Screen 2</Li>
           <Li>Screen 3</Li>
         </Ul>
