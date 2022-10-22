@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import Ads from "../components/Ads";
 import Aside from "../components/Aside";
@@ -22,14 +21,14 @@ const Main = styled.main`
   justify-content: space-around;
 `;
 
-function Home({ freeItems }) {
+function Home() {
   return (
     <Container>
       <Header />
       <Main>
         <Aside />
-        <BoardMain items={freeItems} />
-        <BoardMain items={freeItems} />
+        <BoardMain name="자유" path="free" />
+        <BoardMain name="투표" path="vote" />
         <Ads />
       </Main>
     </Container>
