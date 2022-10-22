@@ -59,15 +59,20 @@ const StyledBoard = styled.div`
   }
 `;
 
-const BoardMain = ({ items }) => {
+const BoardMain = ({ name, path }) => {
   const [itemsForMain, setItemsForMain] = useState([]);
+
   useEffect(() => {
-    setItemsForMain(items.slice(0, 5));
-  }, []);
+    fetch(`http://localhost:3001/${path}`)
+      .then((res) => res.json())
+      .then((data) => setItemsForMain(data.slice(0, 5)))
+      .catch((e) => console.log(e));
+  }, [path]);
+
   return (
     <StyledBoard className="BoardMain">
       <div className="board-title">
-        <h2 className="board-title-name">투표 게시판</h2>
+        <h2 className="board-title-name">{name}게시판</h2>
       </div>
       <ul className="items-containter">
         {itemsForMain.map((item) => (
