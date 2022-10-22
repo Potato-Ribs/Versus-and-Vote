@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +22,9 @@ const JoinBtn = styled(LoginBtn)`
 function AuthBtn() {
   return (
     <Wrapper>
-      <LoginBtn>Login</LoginBtn>
+      <Link to="/login">
+        <LoginBtn>Login</LoginBtn>
+      </Link>
       <JoinBtn>Join</JoinBtn>
     </Wrapper>
   );

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 const StyledBoard = styled.div`
   width: 35vw;
@@ -59,13 +60,17 @@ const StyledBoard = styled.div`
 `;
 
 const BoardMain = ({ items }) => {
+  const [itemsForMain, setItemsForMain] = useState([]);
+  useEffect(() => {
+    setItemsForMain(items.slice(0, 5));
+  }, []);
   return (
     <StyledBoard className="BoardMain">
       <div className="board-title">
         <h2 className="board-title-name">투표 게시판</h2>
       </div>
       <ul className="items-containter">
-        {items.map((item) => (
+        {itemsForMain.map((item) => (
           <li className="item" key={item.id}>
             <div className="item-detail">
               <div className="about-author">

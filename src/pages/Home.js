@@ -20,17 +20,9 @@ const Main = styled.main`
   width: 100vw;
   display: flex;
   justify-content: space-around;
-  align-items: center;
 `;
 
-function Home({ freeItems, setFreeItems }) {
-  useEffect(() => {
-    fetch("http://localhost:3001/free")
-      .then((res) => res.json())
-      .then((data) => setFreeItems(data))
-      .catch((e) => console.log(e));
-  }, []);
-
+function Home({ freeItems }) {
   return (
     <Container>
       <Header />
