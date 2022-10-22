@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../util/api";
+import TextWithLines from "../components/TextWithLines";
 
 library.add(fab);
 
@@ -53,24 +54,6 @@ const StyledSignInAndUp = styled.div`
     justify-content: center;
     align-items: center;
   }
-  .line {
-    display: flex;
-    flex-basis: 100%;
-    align-items: center;
-    margin: 2.3rem 0 0.4rem 0;
-
-    ::before,
-    ::after {
-      content: "";
-      flex-grow: 1;
-      background: black;
-      height: 1px;
-    }
-  }
-  .line-text {
-    background-color: white;
-    padding: 5px;
-  }
   .signIn-form {
     display: flex;
     flex-direction: column;
@@ -114,13 +97,13 @@ const SignInAndUp = () => {
               <FontAwesomeIcon icon={["fab", "github"]} />
             </div>
           </div>
-          <div className="line">
-            <span className="line-text">
-              {isSigningUp
+          <TextWithLines
+            text={
+              isSigningUp
                 ? "회원가입에 필요한 기본정보를 입력해주세요."
-                : "VV 아이디로 로그인"}
-            </span>
-          </div>
+                : "VV 아이디로 로그인"
+            }
+          />
           <form className="signIn-form">
             <Input
               label="아이디"
