@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
-import Board from "./pages/Board";
+import BoardList from "./pages/BoardList";
+import BoardWrite from "./pages/BoardWrite";
 import Profile from "./components/Profile";
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
-          <Route path="/board" element={<Board />} />
+          <Route path="/board" element={<BoardList />} />
+          <Route path="/write" element={<BoardWrite />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
