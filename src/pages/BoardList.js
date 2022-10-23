@@ -22,7 +22,7 @@ const Main = styled.main`
   justify-content: space-around;
 `;
 
-function Board() {
+function BoardList() {
   return (
     <Container>
       <Header />
@@ -35,4 +35,4 @@ function Board() {
   );
 }
 
-export default Board;
+export default BoardList;
