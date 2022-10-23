@@ -2,6 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { BtnAccent } from "../button/BtnAccent";
+import { BtnDefault } from "../button/BtnDefault";
 
 const StyledBoard = styled.div`
   width: 70vw;
@@ -25,35 +28,6 @@ const StyledBoard = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    button {
-      height: 50px;
-      padding: 0 20px;
-      border-radius: 10px;
-      font-size: 18px;
-    }
-
-    button:first-child {
-      color: ${(props) => props.theme.bgColor};
-      background-color: ${(props) => props.theme.accentColor};
-      border: none;
-
-      &:hover {
-        background-color: ${(props) => props.theme.accentColorOpacity};
-        cursor: pointer;
-      }
-    }
-
-    button:last-child {
-      border: 1px solid ${(props) => props.theme.textColor};
-      color: ${(props) => props.theme.textColor};
-      background-color: ${(props) => props.theme.bgColor};
-
-      &:hover {
-        background-color: ${(props) => props.theme.bgColorOpacity};
-        cursor: pointer;
-      }
-    }
 
     .board-tab {
       display: flex;
@@ -248,14 +222,16 @@ const List = ({ path }) => {
         <h2 className="board-title-name">투표 게시판</h2>
       </div>
       <div className="board-util">
-        <button>✏️ 작성하기</button>
+        <Link to="/write">
+          <BtnAccent>✏️ 작성하기</BtnAccent>
+        </Link>
         <ul className="board-tab">
           <li>기술</li>
           <li>커리어</li>
           <li>기타</li>
           <li>전체</li>
         </ul>
-        <button>⬇️ 최신순</button>
+        <BtnDefault>⬇️ 최신순</BtnDefault>
       </div>
       <hr />
       <div className="board-list-util">
