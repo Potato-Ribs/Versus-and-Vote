@@ -4,15 +4,13 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
 import Input from "../components/Input";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { BASE_URL } from "../util/api";
+import { Link, useLocation } from "react-router-dom";
 import TextWithLines from "../components/TextWithLines";
 
 library.add(fab);
 
 const StyledSignInAndUp = styled.div`
   width: 100vw;
-  /* min-height: 100vh; */
   padding-bottom: 4rem;
   display: flex;
   justify-content: center;
@@ -146,12 +144,12 @@ const SignInAndUp = () => {
               {isSigningUp ? (
                 <>
                   <span>이미 회원이신가요?</span>
-                  <a href={BASE_URL + "login"}>로그인</a>
+                  <Link to="/login">로그인</Link>
                 </>
               ) : (
                 <>
                   <span>아직 회원이 아니신가요?</span>
-                  <a href={BASE_URL + "join"}>회원가입</a>
+                  <Link to="/join">회원가입</Link>
                 </>
               )}
             </p>
