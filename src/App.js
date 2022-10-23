@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
 import Board from "./pages/Board";
+import Profile from "./components/Profile";
 
 function App() {
   const isDark = useSelector((state) => state.isDark.value);
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
           <Route path="/board" element={<Board />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </ThemeProvider>
