@@ -2,6 +2,7 @@ import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import TextWithLines from "../TextWithLines";
+import Comment from "./Comment";
 import Tag from "./Tag";
 
 const StyledArticle = styled.div`
@@ -99,7 +100,7 @@ const Article = () => {
           {/** 좋아요 */}
         </div>
       </div>
-      <div className="comments">{/** 댓글수, 댓글 남기기, 댓글 리스트 */}</div>
+      <Comment articleId />
     </StyledArticle>
   );
 };
