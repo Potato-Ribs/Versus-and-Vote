@@ -11,8 +11,9 @@ import {
   browserSessionPersistence,
   GithubAuthProvider,
   GoogleAuthProvider,
+  onAuthStateChanged,
   setPersistence,
-  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 
 library.add(fab);
@@ -88,12 +89,18 @@ const SignInAndUp = () => {
     if (path === "/join") setIsSigningUp(true);
   }, [path]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) document.location.href = "/";
+    });
+  }, []);
+
   const onProviderLogin = (provider) => {
     let authProvider;
     if (provider === "google") authProvider = new GoogleAuthProvider();
     if (provider === "github") authProvider = new GithubAuthProvider();
     setPersistence(auth, browserSessionPersistence).then(() => {
-      signInWithPopup(auth, authProvider)
+      signInWithRedirect(auth, authProvider)
         .then((result) => {
           if (provider === "google")
             GoogleAuthProvider.credentialFromResult(result);
