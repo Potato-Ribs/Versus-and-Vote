@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthBtn from "./AuthBtn";
 import DarkModeBtn from "./DarkModeBtn";
 import Search from "./Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../../fbase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -60,7 +60,7 @@ function Header() {
   const [userAvatar, setUserAvatar] = useState(null);
   const [toggle, setToggle] = useState(false);
 
-  useState(() => {
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) setUserAvatar(user.photoURL);
     });
