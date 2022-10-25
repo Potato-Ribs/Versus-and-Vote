@@ -100,7 +100,9 @@ function Header() {
           <Link to="/board">
             <Li>Screen 1</Li>
           </Link>
-          <Li>Screen 2</Li>
+          <Link to="/free">
+            <Li>Screen 2</Li>
+          </Link>
           <Li>Screen 3</Li>
         </Ul>
       </Nav>
