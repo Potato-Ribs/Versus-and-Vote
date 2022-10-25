@@ -12,7 +12,14 @@ const StyledInput = styled.div`
   }
 `;
 
-const Input = ({ label, type, inputValue, setInput }) => {
+const Input = ({
+  label,
+  type,
+  inputValue,
+  setInput,
+  placeholder,
+  required,
+}) => {
   const onInputChange = (e) => {
     const value = e.target.value;
     setInput(value);
@@ -20,12 +27,24 @@ const Input = ({ label, type, inputValue, setInput }) => {
   return (
     <StyledInput className="Input">
       <label className="input-label">{label}</label>
-      <input
-        className="input-box"
-        type={type}
-        value={inputValue}
-        onChange={onInputChange}
-      />
+      {required ? (
+        <input
+          className="input-box"
+          type={type}
+          value={inputValue}
+          onChange={onInputChange}
+          placeholder={placeholder}
+          required
+        />
+      ) : (
+        <input
+          className="input-box"
+          type={type}
+          value={inputValue}
+          onChange={onInputChange}
+          placeholder={placeholder}
+        />
+      )}
     </StyledInput>
   );
 };

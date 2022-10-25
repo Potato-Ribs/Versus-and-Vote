@@ -9,12 +9,17 @@ import TextWithLines from "../components/TextWithLines";
 import { auth } from "../fbase";
 import {
   browserSessionPersistence,
+  createUserWithEmailAndPassword,
   GithubAuthProvider,
   GoogleAuthProvider,
-  onAuthStateChanged,
   setPersistence,
-  signInWithRedirect,
+  signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
+import { validateEmail, validatePw } from "../util/validationCheck";
+import { BASE_URL } from "../util/api";
+import { BtnAccent } from "../components/button/BtnAccent";
+import lightLogo from "../logo/logo_light.jpeg";
 
 library.add(fab);
 
@@ -27,16 +32,13 @@ const StyledSignInAndUp = styled.div`
   .sign-form-container {
     width: 100%;
     max-width: 28rem;
-    background-color: pink;
     display: flex;
     flex-direction: column;
   }
-  .logo {
-    width: 13rem;
+  .logo-img {
     height: 10rem;
-    background-color: gray;
-    margin-top: 3rem;
     align-self: center;
+    margin: 1rem 0;
   }
   .welcome {
     font-size: 1.9rem;
@@ -48,65 +50,75 @@ const StyledSignInAndUp = styled.div`
     margin-top: 2rem;
   }
   .sns-sign-buttons {
+    box-sizing: border-box;
     display: grid;
     gap: 0.7rem;
+    margin-top: 5px;
   }
   .sns {
     font-size: 1.5rem;
-    background-color: red;
     border-radius: 0.35rem;
     grid-row: 1/2;
     padding: 0.5rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 1px 1px 5px grey;
+    :hover {
+      background-color: #f5f9ff;
+    }
   }
   .signIn-form {
     display: flex;
     flex-direction: column;
   }
-  .sign-button {
-    margin-top: 1.8rem;
-    padding: 0.6rem 0.75rem;
-  }
   .signUp {
     align-self: center;
     margin-top: 1.3rem;
   }
+  .validation {
+    font-size: 0.9rem;
+    color: red;
+    margin-top: 5px;
+  }
+  .signUp-success {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 10rem 0;
+  }
+  .sign-button {
+    margin-top: 1.5rem;
+  }
 `;
 
 const SignInAndUp = () => {
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [isSigningUp, setIsSigningUp] = useState(true);
   const [checkPw, setCheckPw] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userNickname, setUserNickname] = useState("");
+  const [isJoined, setIsJoined] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPw, setValidPw] = useState(true);
+  const [validCheckPw, setValidCheckPw] = useState(true);
+  // const [userName, setUserName] = useState("");
+  // const [userNickname, setUserNickname] = useState("");
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (path === "/login") setIsSigningUp(false);
+    if (path === "/login") {
+      setIsSigningUp(false);
+      setValidEmail(true);
+      setValidPw(true);
+    }
     if (path === "/join") setIsSigningUp(true);
   }, [path]);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) document.location.href = "/";
-    });
-  }, []);
 
   const onProviderLogin = (provider) => {
     let authProvider;
     if (provider === "google") authProvider = new GoogleAuthProvider();
     if (provider === "github") authProvider = new GithubAuthProvider();
     setPersistence(auth, browserSessionPersistence).then(() => {
-      signInWithRedirect(auth, authProvider)
-        .then((result) => {
-          if (provider === "google")
-            GoogleAuthProvider.credentialFromResult(result);
-          if (provider === "github")
-            GithubAuthProvider.credentialFromResult(result);
-        })
+      signInWithPopup(auth, authProvider)
         .then(() => {
           document.location.href = "/";
         })
@@ -122,60 +134,115 @@ const SignInAndUp = () => {
     });
   };
 
+  const onSignUp = (e) => {
+    e.preventDefault();
+    setValidEmail(validateEmail(email));
+    setValidPw(validatePw(pw));
+    setValidCheckPw(pw === checkPw);
+    if (email && pw && pw === checkPw && validEmail && validPw && validCheckPw)
+      createUserWithEmailAndPassword(auth, email, pw)
+        .then(() => {
+          setIsJoined(true);
+        })
+        .catch((e) => alert(e.message));
+  };
+
+  const onSignIn = (e) => {
+    e.preventDefault();
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      signInWithEmailAndPassword(auth, email, pw)
+        .then(() => {
+          document.location.href = "/";
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
+    });
+  };
+
   return (
     <StyledSignInAndUp className="SignInAndUp">
       <div className="sign-form-container">
-        <div className="logo">로고</div>
+        <div className="logo-img">
+          <Link to="/">
+            <img className="logo-img" src={lightLogo} alt="" />
+          </Link>
+        </div>
         <h2 className="welcome">VV에 오신 것을 환영합니다.</h2>
-        <div className="sns-sign">
-          <label>SNS {isSigningUp ? "회원가입" : "로그인"}</label>
-          <div className="sns-sign-buttons">
-            <div
-              className="sns"
-              onClick={() => {
-                onProviderLogin("google");
-              }}
-            >
-              <FontAwesomeIcon icon={["fab", "google"]} />
+        {isJoined ? (
+          <form className="signUp-success">
+            <div>가입이 완료되었습니다.</div>
+            <a href={BASE_URL + "login"}>로그인하러 가기</a>
+          </form>
+        ) : (
+          <div className="sns-sign">
+            <div>SNS {isSigningUp ? "회원가입" : "로그인"}</div>
+            <div className="sns-sign-buttons">
+              <div
+                className="sns"
+                onClick={() => {
+                  onProviderLogin("google");
+                }}
+              >
+                <FontAwesomeIcon icon={["fab", "google"]} />
+              </div>
+              <div
+                className="sns"
+                onClick={() => {
+                  onProviderLogin("github");
+                }}
+              >
+                <FontAwesomeIcon icon={["fab", "github"]} />
+              </div>
             </div>
-            <div
-              className="sns"
-              onClick={() => {
-                onProviderLogin("github");
-              }}
-            >
-              <FontAwesomeIcon icon={["fab", "github"]} />
-            </div>
-          </div>
-          <TextWithLines
-            text={
-              isSigningUp
-                ? "회원가입에 필요한 기본정보를 입력해주세요."
-                : "VV 아이디로 로그인"
-            }
-          />
-          <form className="signIn-form">
-            <Input
-              label="아이디"
-              type="text"
-              inputValue={id}
-              setInput={setId}
+            <TextWithLines
+              text={
+                isSigningUp
+                  ? "회원가입에 필요한 기본정보를 입력해주세요."
+                  : "VV 아이디로 로그인"
+              }
             />
-            <Input
-              label="비밀번호"
-              type="password"
-              inputValue={pw}
-              setInput={setPw}
-            />
-            {isSigningUp && (
-              <>
-                <Input
-                  label="비밀번호 확인"
-                  type="password"
-                  inputValue={checkPw}
-                  setInput={setCheckPw}
-                />
-                <Input
+            <form className="signIn-form">
+              <Input
+                label="이메일"
+                type="text"
+                inputValue={email}
+                setInput={setEmail}
+                placeholder={isSigningUp ? "이메일을 입력해주세요" : ""}
+                required={true}
+              />
+              <div className="validation">
+                {!validEmail && "이메일을 확인해주세요"}
+              </div>
+              <Input
+                label="비밀번호"
+                type="password"
+                inputValue={pw}
+                setInput={setPw}
+                placeholder={
+                  isSigningUp ? "최소 8자 이상(알파벳, 숫자 필수)" : ""
+                }
+                required={true}
+              />
+              <div className="validation">
+                {!validPw && "비밀번호를 확인해주세요"}
+              </div>
+              {isSigningUp && (
+                <>
+                  <Input
+                    label="비밀번호 확인"
+                    type="password"
+                    inputValue={checkPw}
+                    setInput={setCheckPw}
+                    placeholder={
+                      isSigningUp ? "최소 8자 이상(알파벳, 숫자 필수)" : ""
+                    }
+                    required={true}
+                  />
+                  <div className="validation">
+                    {!validCheckPw && "비밀번호가 일치하지 않습니다."}
+                  </div>
+                  {/* <Input
                   label="실명"
                   type="text"
                   inputValue={userName}
@@ -186,27 +253,34 @@ const SignInAndUp = () => {
                   type="text"
                   inputValue={userNickname}
                   setInput={setUserNickname}
-                />
-              </>
-            )}
-            <button className="sign-button">
-              {isSigningUp ? "회원가입" : "로그인"}
-            </button>
-            <p className="signUp">
-              {isSigningUp ? (
-                <>
-                  <span>이미 회원이신가요?</span>
-                  <Link to="/login">로그인</Link>
-                </>
-              ) : (
-                <>
-                  <span>아직 회원이 아니신가요?</span>
-                  <Link to="/join">회원가입</Link>
+                /> */}
                 </>
               )}
-            </p>
-          </form>
-        </div>
+              {isSigningUp ? (
+                <BtnAccent className="sign-button" onClick={onSignUp}>
+                  회원가입
+                </BtnAccent>
+              ) : (
+                <BtnAccent className="sign-button" onClick={onSignIn}>
+                  로그인
+                </BtnAccent>
+              )}
+              <p className="signUp">
+                {isSigningUp ? (
+                  <>
+                    <span>이미 회원이신가요?</span>
+                    <Link to="/login">로그인</Link>
+                  </>
+                ) : (
+                  <>
+                    <span>아직 회원이 아니신가요?</span>
+                    <Link to="/join">회원가입</Link>
+                  </>
+                )}
+              </p>
+            </form>
+          </div>
+        )}
       </div>
     </StyledSignInAndUp>
   );

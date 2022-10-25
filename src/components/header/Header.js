@@ -6,6 +6,9 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import { auth } from "../../fbase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import lightLogo from "../../logo/logo_light_hori.jpeg";
+import darkLogo from "../../logo/logo_dark_hori.jpeg";
+import { useSelector } from "react-redux";
 
 const Container = styled.header`
   width: 100vw;
@@ -47,8 +50,6 @@ const Nav = styled.nav`
   gap: 140px;
 `;
 
-const HomeBtn = styled.a``;
-
 const Ul = styled.ul`
   display: flex;
   gap: 60px;
@@ -56,13 +57,23 @@ const Ul = styled.ul`
 
 const Li = styled.li``;
 
+const Logo = styled.img`
+  width: 150px;
+`;
+
 function Header() {
   const [userAvatar, setUserAvatar] = useState(null);
   const [toggle, setToggle] = useState(false);
 
+  const isDark = useSelector((state) => state.isDark.value);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setUserAvatar(user.photoURL);
+      if (user)
+        setUserAvatar(
+          user.photoURL ||
+            "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
+        );
     });
   }, []);
 
@@ -79,7 +90,11 @@ function Header() {
     <Container>
       <Nav>
         <Link to="/">
-          <HomeBtn>GoHome</HomeBtn>
+          {isDark ? (
+            <Logo src={darkLogo} alt="" />
+          ) : (
+            <Logo src={lightLogo} alt="" />
+          )}
         </Link>
         <Ul>
           <Link to="/board">
@@ -102,7 +117,9 @@ function Header() {
             />
             {toggle && (
               <div className="user-setting-list">
-                <div className="setting-item">내 프로필</div>
+                <Link to="/profile">
+                  <div className="setting-item">내 프로필</div>
+                </Link>
                 <div className="setting-item" onClick={() => onLogoutClick()}>
                   로그아웃
                 </div>

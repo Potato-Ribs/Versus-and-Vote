@@ -25,7 +25,9 @@ function AuthBtn() {
       <Link to="/login">
         <LoginBtn>Login</LoginBtn>
       </Link>
-      <JoinBtn>Join</JoinBtn>
+      <Link to="/join">
+        <JoinBtn>Join</JoinBtn>
+      </Link>
     </Wrapper>
   );
 }
