@@ -6,6 +6,15 @@ import Input from "../components/Input";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TextWithLines from "../components/TextWithLines";
+import { auth } from "../fbase";
+import {
+  browserSessionPersistence,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  setPersistence,
+  signInWithRedirect,
+} from "firebase/auth";
 
 library.add(fab);
 
@@ -80,6 +89,39 @@ const SignInAndUp = () => {
     if (path === "/join") setIsSigningUp(true);
   }, [path]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) document.location.href = "/";
+    });
+  }, []);
+
+  const onProviderLogin = (provider) => {
+    let authProvider;
+    if (provider === "google") authProvider = new GoogleAuthProvider();
+    if (provider === "github") authProvider = new GithubAuthProvider();
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      signInWithRedirect(auth, authProvider)
+        .then((result) => {
+          if (provider === "google")
+            GoogleAuthProvider.credentialFromResult(result);
+          if (provider === "github")
+            GithubAuthProvider.credentialFromResult(result);
+        })
+        .then(() => {
+          document.location.href = "/";
+        })
+        .catch((e) => {
+          console.log(e.message);
+          if (
+            e.message ===
+            "Firebase: Error (auth/account-exists-with-different-credential)."
+          ) {
+            alert("이미 가입된 이메일입니다.");
+          }
+        });
+    });
+  };
+
   return (
     <StyledSignInAndUp className="SignInAndUp">
       <div className="sign-form-container">
@@ -88,10 +130,20 @@ const SignInAndUp = () => {
         <div className="sns-sign">
           <label>SNS {isSigningUp ? "회원가입" : "로그인"}</label>
           <div className="sns-sign-buttons">
-            <div className="sns">
+            <div
+              className="sns"
+              onClick={() => {
+                onProviderLogin("google");
+              }}
+            >
               <FontAwesomeIcon icon={["fab", "google"]} />
             </div>
-            <div className="sns">
+            <div
+              className="sns"
+              onClick={() => {
+                onProviderLogin("github");
+              }}
+            >
               <FontAwesomeIcon icon={["fab", "github"]} />
             </div>
           </div>
