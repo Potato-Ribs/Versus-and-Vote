@@ -1,4 +1,7 @@
+import { addDoc, collection } from "firebase/firestore";
+import { useState } from "react";
 import styled from "styled-components";
+import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
 
@@ -72,6 +75,36 @@ const WriteForm = styled.form`
 `;
 
 const Write = () => {
+  const [topic, setTopic] = useState("");
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+
+  const onTopicChange = (event) => {
+    setTopic(event.target.value);
+  };
+
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const onTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const onClickAccess = async (event) => {
+    event.preventDefault();
+    try {
+      const docRef = await addDoc(collection(db, "free"), {
+        topic,
+        title,
+        text,
+        createdAt: Date.now(),
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
+
   return (
     <StyledBoard className="BoardMain">
       <Header>
@@ -84,20 +117,30 @@ const Write = () => {
       </Header>
       <WriteForm>
         <label for="topic">토픽</label>
-        <select id="topic">
+        <select onChange={onTopicChange} value={topic} id="topic">
           <option>토픽을 선택해주세요.</option>
           <option>사는얘기</option>
           <option>모임&스터디</option>
         </select>
         <label for="title">제목</label>
-        <input id="title" placeholder="제목을 입력해주세요." />
+        <input
+          id="title"
+          placeholder="제목을 입력해주세요."
+          value={title}
+          onChange={onTitleChange}
+        />
         <label for="tag">태그</label>
         <input id="tag" placeholder="태그를 입력해주세요." />
         <label for="text">본문</label>
-        <textarea id="text" placeholder="본문을 입력해주세요." />
+        <textarea
+          id="text"
+          placeholder="본문을 입력해주세요."
+          value={text}
+          onChange={onTextChange}
+        />
         <div>
           <BtnDefault>취소</BtnDefault>
-          <BtnAccent>등록</BtnAccent>
+          <BtnAccent onClick={onClickAccess}>등록</BtnAccent>
         </div>
       </WriteForm>
     </StyledBoard>

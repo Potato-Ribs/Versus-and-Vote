@@ -8,6 +8,7 @@ import SignInAndUp from "./pages/SignInAndUp";
 import BoardList from "./pages/BoardList";
 import BoardWrite from "./pages/BoardWrite";
 import Profile from "./components/Profile";
+import FreeList from "./pages/FreeList";
 
 function App() {
   const isDark = useSelector((state) => state.isDark.value);
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
           <Route path="/board" element={<BoardList />} />
+          <Route path="/free" element={<FreeList />} />
           <Route path="/write" element={<BoardWrite />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
