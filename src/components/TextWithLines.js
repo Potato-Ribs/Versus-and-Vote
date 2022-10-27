@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
     ::after {
       content: "";
       flex-grow: 1;
-      background: black;
+      background: ${(props) => props.theme.textColor};
       height: 1px;
     }
     ::after {
@@ -21,7 +21,7 @@ const StyledDiv = styled.div`
     }
   }
   .line-text {
-    background-color: white;
+    background-color: ${(props) => props.theme.bgColor};
     padding: 5px;
   }
 `;
