@@ -1,5 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
@@ -78,6 +79,8 @@ const Write = () => {
   const [topic, setTopic] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const currentUser = useSelector((state) => state.currentUser);
+  const { displayName, photoURL } = currentUser;
 
   const onTopicChange = (event) => {
     setTopic(event.target.value);
@@ -93,15 +96,11 @@ const Write = () => {
 
   const onClickAccess = async (event) => {
     event.preventDefault();
-    try {
-      const docRef = await addDoc(collection(db, "free"), {
-        topic,
-        title,
-        text,
-        createdAt: Date.now(),
-      });
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    if ((topic, title, text)) {
+      const createdAt = new Date().toLocaleString();
+      const data = { topic, title, text, createdAt, displayName, photoURL };
+      await addDoc(collection(db, "free"), data);
+      document.location.href = "/free";
     }
   };
 
@@ -111,13 +110,13 @@ const Write = () => {
         <h1>함께 할 때 더 즐거운 순간</h1>
         <span>박연우</span>
         <span>
-          님 지식공유 플랫폼 OKKY에서 다양한 사람을 만나고 생각의 폭을
+          님 투표와 자유의 플랫폼 VV에서 다양한 사람을 만나고 생각의 폭을
           넓혀보세요.
         </span>
       </Header>
-      <WriteForm>
+      <WriteForm onSubmit={onClickAccess}>
         <label for="topic">토픽</label>
-        <select onChange={onTopicChange} value={topic} id="topic">
+        <select onChange={onTopicChange} value={topic} id="topic" required>
           <option>토픽을 선택해주세요.</option>
           <option>사는얘기</option>
           <option>모임&스터디</option>
@@ -128,19 +127,19 @@ const Write = () => {
           placeholder="제목을 입력해주세요."
           value={title}
           onChange={onTitleChange}
+          required
         />
-        <label for="tag">태그</label>
-        <input id="tag" placeholder="태그를 입력해주세요." />
         <label for="text">본문</label>
         <textarea
           id="text"
           placeholder="본문을 입력해주세요."
           value={text}
           onChange={onTextChange}
+          required
         />
         <div>
           <BtnDefault>취소</BtnDefault>
-          <BtnAccent onClick={onClickAccess}>등록</BtnAccent>
+          <BtnAccent>등록</BtnAccent>
         </div>
       </WriteForm>
     </StyledBoard>

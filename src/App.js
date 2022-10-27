@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { getCurrentUser } from "./app/features/currentUserSlice";
 import { auth } from "./fbase";
+import ViewArticle from "./pages/ViewArticle";
+import NotFound from "./components/article/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +39,8 @@ function App() {
           <Route path="/free" element={<FreeList />} />
           <Route path="/write" element={<BoardWrite />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/article/:id" element={<ViewArticle />} />
+          <Route path="/article/:id" element={<NotFound />} />
         </Routes>
       </Router>
     </ThemeProvider>
