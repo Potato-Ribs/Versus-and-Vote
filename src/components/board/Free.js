@@ -219,16 +219,19 @@ const Free = () => {
 
     onSnapshot(q, (snapshot) => {
       const itemsArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
         ...doc.data(),
       }));
       setItemsForBoard(itemsArray);
     });
   }, []);
 
+  console.log(itemsForBoard);
+
   return (
     <StyledBoard className="BoardMain">
       <div className="board-title">
-        <h2 className="board-title-name">투표 게시판</h2>
+        <h2 className="board-title-name">자유 게시판</h2>
       </div>
       <div className="board-util">
         <Link to="/write">
@@ -263,9 +266,11 @@ const Free = () => {
         {itemsForBoard.map((item) => (
           <>
             <li className="item" key={item.id}>
-              <ItemMid>
-                <h1>{item.title}</h1>
-              </ItemMid>
+              <Link to={"/article/" + item.id}>
+                <ItemMid>
+                  <h1>{item.title}</h1>
+                </ItemMid>
+              </Link>
               <ItemBot>
                 <div>
                   <span>{item.text}</span>

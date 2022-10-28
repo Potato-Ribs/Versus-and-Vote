@@ -19,15 +19,18 @@ import {
 import { validateEmail, validatePw } from "../util/validationCheck";
 import { BASE_URL } from "../util/api";
 import { BtnAccent } from "../components/button/BtnAccent";
-import lightLogo from "../logo/logo_light.jpeg";
+import { useSelector } from "react-redux";
 
 library.add(fab);
 
 const StyledSignInAndUp = styled.div`
   width: 100vw;
+  height: 100vh;
   padding-bottom: 4rem;
   display: flex;
   justify-content: center;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
 
   .sign-form-container {
     width: 100%;
@@ -100,9 +103,8 @@ const SignInAndUp = () => {
   const [validEmail, setValidEmail] = useState(true);
   const [validPw, setValidPw] = useState(true);
   const [validCheckPw, setValidCheckPw] = useState(true);
-  // const [userName, setUserName] = useState("");
-  // const [userNickname, setUserNickname] = useState("");
   const path = useLocation().pathname;
+  const isDark = useSelector((state) => state.isDark.value);
 
   useEffect(() => {
     if (path === "/login") {
@@ -165,7 +167,23 @@ const SignInAndUp = () => {
       <div className="sign-form-container">
         <div className="logo-img">
           <Link to="/">
-            <img className="logo-img" src={lightLogo} alt="" />
+            {isDark ? (
+              <img
+                className="logo-img"
+                src={
+                  "https://velog.velcdn.com/images/2pandi/post/8a684dfa-4344-4a8b-9bb3-f5fcc6c77512/image.jpeg"
+                }
+                alt=""
+              />
+            ) : (
+              <img
+                className="logo-img"
+                src={
+                  "https://velog.velcdn.com/images/2pandi/post/48173aca-0228-490e-ab86-19750358950a/image.jpeg"
+                }
+                alt=""
+              />
+            )}
           </Link>
         </div>
         <h2 className="welcome">VV에 오신 것을 환영합니다.</h2>
@@ -242,18 +260,6 @@ const SignInAndUp = () => {
                   <div className="validation">
                     {!validCheckPw && "비밀번호가 일치하지 않습니다."}
                   </div>
-                  {/* <Input
-                  label="실명"
-                  type="text"
-                  inputValue={userName}
-                  setInput={setUserName}
-                />
-                <Input
-                  label="닉네임"
-                  type="text"
-                  inputValue={userNickname}
-                  setInput={setUserNickname}
-                /> */}
                 </>
               )}
               {isSigningUp ? (

@@ -5,10 +5,9 @@ import DarkModeBtn from "./DarkModeBtn";
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import { auth } from "../../fbase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import lightLogo from "../../logo/logo_light_hori.jpeg";
-import darkLogo from "../../logo/logo_dark_hori.jpeg";
-import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../../app/features/currentUserSlice";
 
 const Container = styled.header`
   width: 100vw;
@@ -23,6 +22,7 @@ const Container = styled.header`
 
   .user-avatar {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
     position: relative;
   }
@@ -62,25 +62,24 @@ const Logo = styled.img`
 `;
 
 function Header() {
-  const [userAvatar, setUserAvatar] = useState(null);
   const [toggle, setToggle] = useState(false);
-
   const isDark = useSelector((state) => state.isDark.value);
+  const currentUser = useSelector((state) => state.currentUser);
+  const [userAvatar, setUserAvatar] = useState(currentUser.photoURL);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user)
-        setUserAvatar(
-          user.photoURL ||
-            "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
-        );
-    });
-  }, []);
+    setUserAvatar(currentUser.photoURL);
+  }, [currentUser.photoURL]);
 
   const onLogoutClick = () => {
     signOut(auth);
     document.location.href = "/";
+    dispatch(getCurrentUser({ photoURL: "", displayName: "" }));
+    setUserAvatar("");
   };
+
+  console.log(currentUser);
 
   const openToggle = () => {
     setToggle(!toggle);
@@ -91,9 +90,19 @@ function Header() {
       <Nav>
         <Link to="/">
           {isDark ? (
-            <Logo src={darkLogo} alt="" />
+            <Logo
+              src={
+                "https://velog.velcdn.com/images/2pandi/post/0195ad06-f54d-4958-a4a6-6dc358cf62a4/image.jpeg"
+              }
+              alt=""
+            />
           ) : (
-            <Logo src={lightLogo} alt="" />
+            <Logo
+              src={
+                "https://velog.velcdn.com/images/2pandi/post/47f2da28-e528-49dc-bcc5-d76cff41cc74/image.jpeg"
+              }
+              alt=""
+            />
           )}
         </Link>
         <Ul>
@@ -114,7 +123,10 @@ function Header() {
             <img
               className="user-avatar"
               onClick={() => openToggle()}
-              src={userAvatar}
+              src={
+                userAvatar ||
+                "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
+              }
               alt="user avatar"
             />
             {toggle && (
