@@ -48,6 +48,7 @@ const Nav = styled.nav`
   width: 40vw;
   margin-right: 10vw;
   gap: 140px;
+  align-items: center;
 `;
 
 const Ul = styled.ul`
@@ -55,7 +56,9 @@ const Ul = styled.ul`
   gap: 60px;
 `;
 
-const Li = styled.li``;
+const Li = styled.li`
+  white-space: nowrap;
+`;
 
 const Logo = styled.img`
   width: 150px;
@@ -107,12 +110,12 @@ function Header() {
         </Link>
         <Ul>
           <Link to="/board">
-            <Li>Screen 1</Li>
+            <Li>투표 게시판</Li>
           </Link>
+          <Li>밸런스 게임</Li>
           <Link to="/free">
-            <Li>Screen 2</Li>
+            <Li>자유 게시판</Li>
           </Link>
-          <Li>Screen 3</Li>
         </Ul>
       </Nav>
       <Search />
