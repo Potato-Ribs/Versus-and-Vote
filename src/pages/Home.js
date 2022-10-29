@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Ads from "../components/Ads";
 import Aside from "../components/Aside";
-import BoardMain from "../components/BoardMain";
+import BoardMain from "../components/main/BoardMain";
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
 
