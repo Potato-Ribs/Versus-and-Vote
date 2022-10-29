@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import currentUserReducer from "./features/currentUserSlice";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
+import currentBoardReducer from "./features/currentBoardSlice";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   isDark: isDarkReducer,
   currentUser: currentUserReducer,
+  currentBoard: currentBoardReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -8,6 +8,7 @@ import { auth } from "../../fbase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../app/features/currentUserSlice";
+import { setCurrentBoard } from "../../app/features/currentBoardSlice";
 
 const Container = styled.header`
   width: 100vw;
@@ -82,10 +83,12 @@ function Header() {
     setUserAvatar("");
   };
 
-  console.log(currentUser);
-
   const openToggle = () => {
     setToggle(!toggle);
+  };
+
+  const onBoardClick = (boardTitle) => {
+    dispatch(setCurrentBoard(boardTitle));
   };
 
   return (
@@ -110,11 +113,11 @@ function Header() {
         </Link>
         <Ul>
           <Link to="/board">
-            <Li>투표 게시판</Li>
+            <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
           </Link>
-          <Li>밸런스 게임</Li>
+          <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
           <Link to="/free">
-            <Li>자유 게시판</Li>
+            <Li onClick={() => onBoardClick("free")}>자유 게시판</Li>
           </Link>
         </Ul>
       </Nav>

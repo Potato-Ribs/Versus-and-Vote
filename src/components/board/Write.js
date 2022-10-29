@@ -1,6 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
@@ -76,11 +77,13 @@ const WriteForm = styled.form`
 `;
 
 const Write = () => {
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState("사는얘기");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const currentUser = useSelector((state) => state.currentUser);
   const { displayName, photoURL } = currentUser;
+  const navigate = useNavigate();
+  const currentBoard = useSelector((state) => state.currentBoard.value);
 
   const onTopicChange = (event) => {
     setTopic(event.target.value);
@@ -96,12 +99,19 @@ const Write = () => {
 
   const onClickAccess = async (event) => {
     event.preventDefault();
-    if ((topic, title, text)) {
+    if (topic && title && text) {
       const createdAt = new Date().toLocaleString();
       const data = { topic, title, text, createdAt, displayName, photoURL };
       await addDoc(collection(db, "free"), data);
-      document.location.href = "/free";
+      navigate("/free");
     }
+    if (!topic) alert("토픽을 선택해주세요");
+    else if (!title) alert("제목을 입력해주세요");
+    else if (!text) alert("내용을 입력해주세요");
+  };
+
+  const onCancelClick = () => {
+    navigate("/" + currentBoard);
   };
 
   return (
@@ -115,13 +125,12 @@ const Write = () => {
         </span>
       </Header>
       <WriteForm onSubmit={onClickAccess}>
-        <label for="topic">토픽</label>
+        <label htmlFor="topic">토픽</label>
         <select onChange={onTopicChange} value={topic} id="topic" required>
-          <option>토픽을 선택해주세요.</option>
-          <option>사는얘기</option>
+          <option>요즘 이야기</option>
           <option>모임&스터디</option>
         </select>
-        <label for="title">제목</label>
+        <label htmlFor="title">제목</label>
         <input
           id="title"
           placeholder="제목을 입력해주세요."
@@ -129,17 +138,21 @@ const Write = () => {
           onChange={onTitleChange}
           required
         />
-        <label for="text">본문</label>
+        <label htmlFor="text">내용</label>
         <textarea
           id="text"
-          placeholder="본문을 입력해주세요."
+          placeholder="내용을 입력해주세요."
           value={text}
           onChange={onTextChange}
           required
         />
         <div>
-          <BtnDefault>취소</BtnDefault>
-          <BtnAccent>등록</BtnAccent>
+          <BtnDefault type="button" onClick={onCancelClick}>
+            취소
+          </BtnDefault>
+          <BtnAccent type="button" onClick={onClickAccess}>
+            등록
+          </BtnAccent>
         </div>
       </WriteForm>
     </StyledBoard>
