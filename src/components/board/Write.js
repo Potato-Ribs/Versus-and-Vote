@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
@@ -120,47 +120,53 @@ const Write = () => {
   };
 
   return (
-    <StyledBoard className="BoardMain">
-      <Header>
-        <h1>함께 할 때 더 즐거운 순간</h1>
-        <span>박연우</span>
-        <span>
-          님 투표와 자유의 플랫폼 VV에서 다양한 사람을 만나고 생각의 폭을
-          넓혀보세요.
-        </span>
-      </Header>
-      <WriteForm onSubmit={onClickAccess}>
-        <label htmlFor="topic">토픽</label>
-        <select onChange={onTopicChange} value={topic} id="topic" required>
-          <option>요즘 이야기</option>
-          <option>모임&스터디</option>
-        </select>
-        <label htmlFor="title">제목</label>
-        <input
-          id="title"
-          placeholder="제목을 입력해주세요."
-          value={title}
-          onChange={onTitleChange}
-          required
-        />
-        <label htmlFor="text">내용</label>
-        <textarea
-          id="text"
-          placeholder="내용을 입력해주세요."
-          value={text}
-          onChange={onTextChange}
-          required
-        />
-        <div>
-          <BtnDefault type="button" onClick={onCancelClick}>
-            취소
-          </BtnDefault>
-          <BtnAccent type="button" onClick={onClickAccess}>
-            등록
-          </BtnAccent>
-        </div>
-      </WriteForm>
-    </StyledBoard>
+    <>
+      {displayName ? (
+        <StyledBoard className="BoardMain">
+          <Header>
+            <h1>함께 할 때 더 즐거운 순간</h1>
+            <span>{displayName}</span>
+            <span>
+              님 투표와 자유의 플랫폼 VV에서 다양한 사람을 만나고 생각의 폭을
+              넓혀보세요.
+            </span>
+          </Header>
+          <WriteForm onSubmit={onClickAccess}>
+            <label htmlFor="topic">토픽</label>
+            <select onChange={onTopicChange} value={topic} id="topic" required>
+              <option>요즘 이야기</option>
+              <option>모임&스터디</option>
+            </select>
+            <label htmlFor="title">제목</label>
+            <input
+              id="title"
+              placeholder="제목을 입력해주세요."
+              value={title}
+              onChange={onTitleChange}
+              required
+            />
+            <label htmlFor="text">내용</label>
+            <textarea
+              id="text"
+              placeholder="내용을 입력해주세요."
+              value={text}
+              onChange={onTextChange}
+              required
+            />
+            <div>
+              <BtnDefault type="button" onClick={onCancelClick}>
+                취소
+              </BtnDefault>
+              <BtnAccent type="button" onClick={onClickAccess}>
+                등록
+              </BtnAccent>
+            </div>
+          </WriteForm>
+        </StyledBoard>
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </>
   );
 };
 
