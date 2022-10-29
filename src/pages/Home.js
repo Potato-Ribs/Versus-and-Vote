@@ -8,20 +8,26 @@ import Loading from "../components/Loading";
 import { useLoading } from "../util/useLoading";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Main = styled.main`
   width: 100vw;
-  display: flex;
-  justify-content: space-around;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 200px auto 200px;
+  .boards {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
 `;
 
 function Home() {
@@ -36,8 +42,10 @@ function Home() {
         <Header />
         <Main>
           <Aside />
-          <BoardMain name="자유" path="free" />
-          <BoardMain name="투표" path="vote" />
+          <div className="boards">
+            <BoardMain name="자유" path="free" />
+            <BoardMain name="투표" path="vote" />
+          </div>
           <Ads />
         </Main>
       </Container>

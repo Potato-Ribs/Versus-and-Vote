@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 99;
   backdrop-filter: blur(10px);
   position: fixed;
 `;

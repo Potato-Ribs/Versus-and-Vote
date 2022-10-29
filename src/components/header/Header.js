@@ -11,11 +11,13 @@ import { getCurrentUser } from "../../app/features/currentUserSlice";
 import { setCurrentBoard } from "../../app/features/currentBoardSlice";
 
 const Container = styled.header`
+  box-sizing: border-box;
   width: 100vw;
+  max-width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 4vh 4vw;
+  justify-content: space-between;
+  padding: 0.5rem 3rem;
 
   .user-toggle {
     position: relative;
@@ -26,6 +28,7 @@ const Container = styled.header`
     height: 40px;
     border-radius: 50%;
     position: relative;
+    margin-left: 30px;
   }
   .user-setting-list {
     width: 5rem;

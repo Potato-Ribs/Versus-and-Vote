@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const Form = styled.form``;
+const Form = styled.form`
+  .input-wrapper {
+    display: grid;
+  }
+`;
 
 const Input = styled.input`
   width: 200px;
@@ -8,20 +12,34 @@ const Input = styled.input`
   border: 1px solid black;
   border-radius: 20px;
   padding: 0 35px;
+  position: relative;
+  grid-column: 1/2;
+  grid-row: 1/2;
 `;
 
 const Button = styled.button`
-  position: relative;
-  left: 35px;
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
   border: none;
+  margin-left: 10px;
   background-color: white;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  z-index: 1;
 `;
 
 function Search() {
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <Form>
-      <Button>🔎</Button>
-      <Input />
+    <Form onSubmit={onSubmit}>
+      <div className="input-wrapper">
+        <Button>🔎</Button>
+        <Input />
+      </div>
     </Form>
   );
 }
