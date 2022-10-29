@@ -80,10 +80,11 @@ const Write = () => {
   const [topic, setTopic] = useState("사는얘기");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [isSubmitting, SetisSubmitting] = useState(false);
+  const currentBoard = useSelector((state) => state.currentBoard.value);
   const currentUser = useSelector((state) => state.currentUser);
   const { displayName, photoURL } = currentUser;
   const navigate = useNavigate();
-  const currentBoard = useSelector((state) => state.currentBoard.value);
 
   const onTopicChange = (event) => {
     setTopic(event.target.value);
@@ -99,15 +100,19 @@ const Write = () => {
 
   const onClickAccess = async (event) => {
     event.preventDefault();
-    if (topic && title && text) {
-      const createdAt = new Date().toLocaleString();
-      const data = { topic, title, text, createdAt, displayName, photoURL };
-      await addDoc(collection(db, "free"), data);
-      navigate("/free");
-    }
-    if (!topic) alert("토픽을 선택해주세요");
-    else if (!title) alert("제목을 입력해주세요");
-    else if (!text) alert("내용을 입력해주세요");
+    if (!isSubmitting) {
+      SetisSubmitting(true);
+      if (topic && title && text) {
+        const createdAt = new Date().toLocaleString();
+        const data = { topic, title, text, createdAt, displayName, photoURL };
+        await addDoc(collection(db, "free"), data);
+        navigate("/free");
+      }
+      if (!topic) alert("토픽을 선택해주세요");
+      else if (!title) alert("제목을 입력해주세요");
+      else if (!text) alert("내용을 입력해주세요");
+      SetisSubmitting(false);
+    } else alert("진정하세요...글 올라갑니다.");
   };
 
   const onCancelClick = () => {
