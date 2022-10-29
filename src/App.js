@@ -22,7 +22,9 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(getCurrentUser(user));
+        dispatch(
+          getCurrentUser(Object.assign(user, { newPhoto: user.photoURL }))
+        );
       }
     });
   }, [dispatch]);

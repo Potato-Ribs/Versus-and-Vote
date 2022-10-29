@@ -111,6 +111,8 @@ const SignInAndUp = () => {
   const navigate = useNavigate();
   const currentPage = useSelector((state) => state.currentPage.value);
   const dispatch = useDispatch();
+  const newPhoto =
+    "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg";
 
   useEffect(() => {
     if (path === "/login") {
@@ -154,14 +156,14 @@ const SignInAndUp = () => {
           const displayName = email.substring(0, idx);
           await updateProfile(auth.currentUser, {
             displayName,
-            photoURL:
-              "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg",
+            photoURL: newPhoto,
+            newPhoto,
           });
           dispatch(
             getCurrentUser({
               displayName,
-              photoURL:
-                "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg",
+              photoURL: newPhoto,
+              newPhoto,
             })
           );
           setIsJoined(true);

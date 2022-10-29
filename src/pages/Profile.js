@@ -49,35 +49,38 @@ const StyledProfile = styled.div`
 
 const Profile = () => {
   const [displayName, setDisplayName] = useState("");
-  const [newPhoto, setNewPhoto] = useState();
   const currentUser = useSelector((state) => state.currentUser);
-  const [photoURL, setPhotoURL] = useState(currentUser.photoURL);
+  const [newPhoto, setNewPhoto] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentUser) {
       setDisplayName(currentUser.displayName);
       setPhotoURL(currentUser.photoURL);
+      setNewPhoto(currentUser.newPhoto);
     }
   }, [currentUser]);
 
   const onSubmitHandle = async (e) => {
     e.preventDefault();
-    if (!newPhoto) {
+    if (newPhoto === photoURL) {
       await updateProfile(auth.currentUser, { displayName });
-      dispatch(getCurrentUser({ displayName, photoURL }));
+      dispatch(getCurrentUser({ displayName, photoURL, newPhoto }));
+      window.location.reload();
+      alert("프로필이 저장되었습니다.");
     } else {
       const photoRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
-      const response = await uploadString(photoRef, photoURL, "data_url");
+      const response = await uploadString(photoRef, newPhoto, "data_url");
       const url = await getDownloadURL(response.ref);
+      dispatch(getCurrentUser({ displayName, photoURL, newPhoto }));
       await updateProfile(auth.currentUser, {
         displayName,
         photoURL: url,
       });
-      setNewPhoto();
-      dispatch(getCurrentUser({ displayName, photoURL }));
+      window.location.reload();
+      alert("프로필이 저장되었습니다.");
     }
-    document.location.href = "/profile";
   };
 
   const onFileChange = (e) => {
@@ -87,6 +90,7 @@ const Profile = () => {
     reader.onloadend = (e) => {
       const result = e.currentTarget.result;
       setNewPhoto(result);
+      dispatch(getCurrentUser({ displayName, photoURL, newPhoto }));
     };
     reader.readAsDataURL(chosenImg);
   };
@@ -104,14 +108,7 @@ const Profile = () => {
           />
         </div>
         <input type="file" accept="image/*" onChange={onFileChange} />
-        <img
-          className="avatar-setting"
-          src={
-            photoURL ||
-            "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
-          }
-          alt="회원 이미지"
-        />
+        <img className="avatar-setting" src={newPhoto} alt="회원 이미지" />
         <button className="save-profile">저장</button>
       </form>
     </StyledProfile>

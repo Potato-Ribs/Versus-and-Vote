@@ -87,7 +87,7 @@ function Header() {
 
   const onLogoutClick = () => {
     signOut(auth);
-    dispatch(getCurrentUser({ photoURL: "", displayName: "" }));
+    dispatch(getCurrentUser({ photoURL: "", displayName: "", newPhoto: "" }));
     setUserAvatar("");
   };
 
