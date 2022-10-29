@@ -8,6 +8,7 @@ import { db } from "../../fbase";
 import TextWithLines from "../TextWithLines";
 import Comment from "./Comment";
 import Tag from "./Tag";
+import VoteTable from "./VoteTable";
 
 const StyledArticle = styled.div`
   width: 100%;
@@ -66,6 +67,26 @@ const Article = () => {
     };
   }, [articleId]);
 
+  // voteData > content > text : max-legnth 40
+  const voteData = {
+    title: "가위바위보",
+    content: [
+      { id: 0, total: 100, text: "주먹", voted: 60 },
+      {
+        id: 1,
+        total: 100,
+        text: "하지만 이게 아주아주아주 긴 글이라면",
+        voted: 30,
+      },
+      {
+        id: 2,
+        total: 100,
+        text: "하지만 이게 아주아주아주아주아주아주아주아주아주아주아주 긴 글이라면 어떨까",
+        voted: 20,
+      },
+    ],
+  };
+
   return (
     articleData && (
       <StyledArticle className="Article">
@@ -89,12 +110,13 @@ const Article = () => {
         </div>
         <h1 className="article-title">{articleData.title}</h1>
         <div className="article-content">{articleData.text}</div>
+        <VoteTable title={voteData.title} voteContent={voteData.content} />
         <div className="tags-and-likes">
-          <div className="tags-container">
+          {/* <div className="tags-container">
             <Tag tagContent="react" />
             <Tag tagContent="javascript" />
             <Tag tagContent="열받네" />
-          </div>
+          </div> */}
           <div>
             <FontAwesomeIcon className="icon" icon={regular("thumbs-up")} />
             <FontAwesomeIcon className="icon" icon={solid("thumbs-up")} />
