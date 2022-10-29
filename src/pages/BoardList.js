@@ -6,6 +6,7 @@ import List from "../components/board/List";
 import BoardMain from "../components/main/BoardMain";
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
+import { useLoading } from "../util/useLoading";
 
 const Container = styled.div`
   width: 100vw;
@@ -27,9 +28,8 @@ const Main = styled.main`
 function BoardList() {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
+  useLoading(setLoading);
+
   return (
     <>
       {loading ? <Loading /> : null}

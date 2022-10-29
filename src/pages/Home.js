@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Ads from "../components/Ads";
 import Aside from "../components/Aside";
 import BoardMain from "../components/main/BoardMain";
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
+import { useLoading } from "../util/useLoading";
 
 const Container = styled.div`
   width: 100vw;
@@ -26,13 +27,11 @@ const Main = styled.main`
 function Home() {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
+  useLoading(setLoading);
 
   return (
     <>
-      {loading ? <Loading /> : null}
+      {loading && <Loading />}
       <Container>
         <Header />
         <Main>
