@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AuthBtn from "./AuthBtn";
 import DarkModeBtn from "./DarkModeBtn";
 import Search from "./Search";
@@ -9,6 +9,7 @@ import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../app/features/currentUserSlice";
 import { setCurrentBoard } from "../../app/features/currentBoardSlice";
+import { setCurrentPage } from "../../app/features/currentPageSlice";
 
 const Container = styled.header`
   box-sizing: border-box;
@@ -74,14 +75,18 @@ function Header() {
   const currentUser = useSelector((state) => state.currentUser);
   const [userAvatar, setUserAvatar] = useState(currentUser.photoURL);
   const dispatch = useDispatch();
+  const pathname = useLocation().pathname;
 
   useEffect(() => {
     setUserAvatar(currentUser.photoURL);
   }, [currentUser.photoURL]);
 
+  useEffect(() => {
+    dispatch(setCurrentPage(pathname));
+  }, [pathname, dispatch]);
+
   const onLogoutClick = () => {
     signOut(auth);
-    document.location.href = "/";
     dispatch(getCurrentUser({ photoURL: "", displayName: "" }));
     setUserAvatar("");
   };
@@ -126,7 +131,7 @@ function Header() {
       </Nav>
       <Search />
       <DarkModeBtn />
-      {userAvatar ? (
+      {currentUser ? (
         <>
           <div className="user-toggle">
             <img

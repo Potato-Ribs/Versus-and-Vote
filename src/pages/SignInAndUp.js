@@ -4,7 +4,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
 import Input from "../components/Input";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TextWithLines from "../components/TextWithLines";
 import { auth } from "../fbase";
 import {
@@ -106,6 +106,8 @@ const SignInAndUp = () => {
   const [validCheckPw, setValidCheckPw] = useState(true);
   const path = useLocation().pathname;
   const isDark = useSelector((state) => state.isDark.value);
+  const navigate = useNavigate();
+  const currentPage = useSelector((state) => state.currentPage.value);
 
   useEffect(() => {
     if (path === "/login") {
@@ -123,7 +125,7 @@ const SignInAndUp = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       signInWithPopup(auth, authProvider)
         .then(() => {
-          document.location.href = "/";
+          navigate(currentPage);
         })
         .catch((e) => {
           console.log(e.message);
@@ -155,7 +157,7 @@ const SignInAndUp = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       signInWithEmailAndPassword(auth, email, pw)
         .then(() => {
-          document.location.href = "/";
+          navigate(currentPage);
         })
         .catch((e) => {
           alert(e.message);
