@@ -15,11 +15,13 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { validateEmail, validatePw } from "../util/validationCheck";
 import { BASE_URL } from "../util/api";
 import { BtnAccent } from "../components/button/BtnAccent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../app/features/currentUserSlice";
 
 library.add(fab);
 
@@ -108,6 +110,7 @@ const SignInAndUp = () => {
   const isDark = useSelector((state) => state.isDark.value);
   const navigate = useNavigate();
   const currentPage = useSelector((state) => state.currentPage.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (path === "/login") {
@@ -146,7 +149,21 @@ const SignInAndUp = () => {
     setValidCheckPw(pw === checkPw);
     if (email && pw && pw === checkPw && validEmail && validPw && validCheckPw)
       createUserWithEmailAndPassword(auth, email, pw)
-        .then(() => {
+        .then(async () => {
+          const idx = email.indexOf("@");
+          const displayName = email.substring(0, idx);
+          await updateProfile(auth.currentUser, {
+            displayName,
+            photoURL:
+              "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg",
+          });
+          dispatch(
+            getCurrentUser({
+              displayName,
+              photoURL:
+                "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg",
+            })
+          );
           setIsJoined(true);
         })
         .catch((e) => alert(e.message));

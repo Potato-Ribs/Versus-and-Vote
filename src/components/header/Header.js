@@ -131,16 +131,13 @@ function Header() {
       </Nav>
       <Search />
       <DarkModeBtn />
-      {currentUser ? (
+      {userAvatar ? (
         <>
           <div className="user-toggle">
             <img
               className="user-avatar"
               onClick={() => openToggle()}
-              src={
-                userAvatar ||
-                "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
-              }
+              src={userAvatar}
               alt="user avatar"
             />
             {toggle && (
