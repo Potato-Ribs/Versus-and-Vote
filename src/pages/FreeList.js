@@ -12,13 +12,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Main = styled.main`
-  width: 100vw;
+  width: 99vw;
   max-width: 100%;
   display: grid;
   grid-template-columns: 200px auto 200px;

@@ -12,7 +12,7 @@ import { setCurrentBoard } from "../../app/features/currentBoardSlice";
 
 const Container = styled.header`
   box-sizing: border-box;
-  width: 100vw;
+  width: 99vw;
   max-width: 100%;
   display: flex;
   align-items: center;
