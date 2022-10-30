@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Wrapper = styled.div`
   display: flex;
   gap: 30px;
-  margin-left: 100px;
 `;
 
 const LoginBtn = styled.button`

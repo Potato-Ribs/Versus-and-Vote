@@ -7,7 +7,9 @@ import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
 
 const StyledBoard = styled.div`
-  width: 70vw;
+  box-sizing: border-box;
+  min-width: 700px;
+  padding: 0 2rem;
 
   .board-title {
     height: 90px;
@@ -217,7 +219,7 @@ const List = ({ path }) => {
   }, [path]);
 
   return (
-    <StyledBoard className="BoardMain">
+    <StyledBoard className="List">
       <div className="board-title">
         <h2 className="board-title-name">투표 게시판</h2>
       </div>

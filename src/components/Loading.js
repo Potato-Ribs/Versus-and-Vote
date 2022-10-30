@@ -12,8 +12,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 99;
   backdrop-filter: blur(10px);
+  position: fixed;
 `;
 
 function Loading() {
@@ -35,7 +36,7 @@ function Loading() {
           onViewportEnter={() => setIsInView(true)}
         >
           <img
-            src="https://velog.velcdn.com/images/2pandi/post/3f3c4119-d726-41fe-a752-fae4ba72eb1d/image.jpeg"
+            src="https://velog.velcdn.com/images/2pandi/post/b7353922-8256-462c-abed-47616d9725b6/image.jpg"
             alt="logo"
             onLoad={() => setIsLoaded(true)}
           />

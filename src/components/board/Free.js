@@ -9,7 +9,9 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../fbase";
 
 const StyledBoard = styled.div`
-  width: 70vw;
+  box-sizing: border-box;
+  min-width: 700px;
+  padding: 0 2rem;
 
   .board-title {
     height: 90px;

@@ -11,7 +11,9 @@ import Tag from "./Tag";
 import VoteTable from "./VoteTable";
 
 const StyledArticle = styled.div`
+  box-sizing: border-box;
   width: 100%;
+  min-width: 700px;
   padding: 0 2rem;
   .article-header {
     background-color: tomato;
@@ -88,44 +90,46 @@ const Article = () => {
   };
 
   return (
-    articleData && (
-      <StyledArticle className="Article">
-        <TextWithLines text="게시판이름" textPosition="left" />
-        <div className="article-header">
-          <div className="article-info">
-            <img
-              className="user-avatar"
-              src={articleData.photoURL}
-              alt="author avatar"
-            />
-            <div className="user-nickname">{articleData.displayName}</div>
-            <div className="createdAt">{articleData.createdAt}</div>
+    <StyledArticle className="Article">
+      <TextWithLines text="게시판이름" textPosition="left" />
+      {articleData && (
+        <>
+          <div className="article-header">
+            <div className="article-info">
+              <img
+                className="user-avatar"
+                src={articleData.photoURL}
+                alt="author avatar"
+              />
+              <div className="user-nickname">{articleData.displayName}</div>
+              <div className="createdAt">{articleData.createdAt}</div>
+            </div>
+            <div className="article-interaction">
+              <FontAwesomeIcon
+                className="icon"
+                icon={regular("share-from-square")}
+              />
+            </div>
           </div>
-          <div className="article-interaction">
-            <FontAwesomeIcon
-              className="icon"
-              icon={regular("share-from-square")}
-            />
-          </div>
-        </div>
-        <h1 className="article-title">{articleData.title}</h1>
-        <div className="article-content">{articleData.text}</div>
-        <VoteTable title={voteData.title} voteContent={voteData.content} />
-        <div className="tags-and-likes">
-          {/* <div className="tags-container">
+          <h1 className="article-title">{articleData.title}</h1>
+          <div className="article-content">{articleData.text}</div>
+          <VoteTable title={voteData.title} voteContent={voteData.content} />
+          <div className="tags-and-likes">
+            {/* <div className="tags-container">
             <Tag tagContent="react" />
             <Tag tagContent="javascript" />
             <Tag tagContent="열받네" />
           </div> */}
-          <div>
-            <FontAwesomeIcon className="icon" icon={regular("thumbs-up")} />
-            <FontAwesomeIcon className="icon" icon={solid("thumbs-up")} />
-            {/** 좋아요 */}
+            <div>
+              <FontAwesomeIcon className="icon" icon={regular("thumbs-up")} />
+              <FontAwesomeIcon className="icon" icon={solid("thumbs-up")} />
+              {/** 좋아요 */}
+            </div>
           </div>
-        </div>
-        <Comment articleId={articleId} />
-      </StyledArticle>
-    )
+          <Comment articleId={articleId} />
+        </>
+      )}
+    </StyledArticle>
   );
 };
 

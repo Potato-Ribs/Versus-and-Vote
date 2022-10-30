@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AuthBtn from "./AuthBtn";
 import DarkModeBtn from "./DarkModeBtn";
 import Search from "./Search";
@@ -8,13 +8,17 @@ import { auth } from "../../fbase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../app/features/currentUserSlice";
+import { setCurrentBoard } from "../../app/features/currentBoardSlice";
+import { setCurrentPage } from "../../app/features/currentPageSlice";
 
 const Container = styled.header`
-  width: 100vw;
+  box-sizing: border-box;
+  width: 99vw;
+  max-width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 4vh 4vw;
+  justify-content: space-between;
+  padding: 0.5rem 3rem;
 
   .user-toggle {
     position: relative;
@@ -25,6 +29,7 @@ const Container = styled.header`
     height: 40px;
     border-radius: 50%;
     position: relative;
+    margin-left: 30px;
   }
   .user-setting-list {
     width: 5rem;
@@ -48,6 +53,7 @@ const Nav = styled.nav`
   width: 40vw;
   margin-right: 10vw;
   gap: 140px;
+  align-items: center;
 `;
 
 const Ul = styled.ul`
@@ -55,7 +61,9 @@ const Ul = styled.ul`
   gap: 60px;
 `;
 
-const Li = styled.li``;
+const Li = styled.li`
+  white-space: nowrap;
+`;
 
 const Logo = styled.img`
   width: 150px;
@@ -67,22 +75,28 @@ function Header() {
   const currentUser = useSelector((state) => state.currentUser);
   const [userAvatar, setUserAvatar] = useState(currentUser.photoURL);
   const dispatch = useDispatch();
+  const pathname = useLocation().pathname;
 
   useEffect(() => {
     setUserAvatar(currentUser.photoURL);
   }, [currentUser.photoURL]);
 
+  useEffect(() => {
+    dispatch(setCurrentPage(pathname));
+  }, [pathname, dispatch]);
+
   const onLogoutClick = () => {
     signOut(auth);
-    document.location.href = "/";
-    dispatch(getCurrentUser({ photoURL: "", displayName: "" }));
+    dispatch(getCurrentUser({ photoURL: "", displayName: "", newPhoto: "" }));
     setUserAvatar("");
   };
 
-  console.log(currentUser);
-
   const openToggle = () => {
     setToggle(!toggle);
+  };
+
+  const onBoardClick = (boardTitle) => {
+    dispatch(setCurrentBoard(boardTitle));
   };
 
   return (
@@ -107,12 +121,12 @@ function Header() {
         </Link>
         <Ul>
           <Link to="/board">
-            <Li>Screen 1</Li>
+            <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
           </Link>
+          <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
           <Link to="/free">
-            <Li>Screen 2</Li>
+            <Li onClick={() => onBoardClick("free")}>자유 게시판</Li>
           </Link>
-          <Li>Screen 3</Li>
         </Ul>
       </Nav>
       <Search />
@@ -123,10 +137,7 @@ function Header() {
             <img
               className="user-avatar"
               onClick={() => openToggle()}
-              src={
-                userAvatar ||
-                "https://i1.sndcdn.com/avatars-000250434034-mk5uf1-t500x500.jpg"
-              }
+              src={userAvatar}
               alt="user avatar"
             />
             {toggle && (

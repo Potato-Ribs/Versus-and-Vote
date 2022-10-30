@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 const StyledBoard = styled.div`
-  width: 35vw;
+  width: 33vw;
   .board-title {
     height: 64px;
     background-color: lightgray;

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   photoURL: "",
   displayName: "",
+  newPhoto: "",
 };
 
 const currentUserSlice = createSlice({
@@ -12,6 +13,7 @@ const currentUserSlice = createSlice({
     getCurrentUser: (state, actions) => {
       state.photoURL = actions.payload.photoURL;
       state.displayName = actions.payload.displayName;
+      state.newPhoto = actions.payload.newPhoto;
     },
   },
 });

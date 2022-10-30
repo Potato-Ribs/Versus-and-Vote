@@ -5,7 +5,6 @@ import Aside from "../components/Aside";
 import Header from "../components/header/Header";
 
 const Container = styled.div`
-  width: 100vw;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -16,9 +15,10 @@ const Container = styled.div`
 `;
 
 const Main = styled.main`
-  width: 100vw;
-  display: flex;
-  justify-content: space-around;
+  width: 99vw;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 200px auto 200px;
 `;
 
 const ViewArticle = () => {

@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
 import BoardList from "./pages/BoardList";
 import BoardWrite from "./pages/BoardWrite";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 import FreeList from "./pages/FreeList";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -22,7 +22,9 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(getCurrentUser(user));
+        dispatch(
+          getCurrentUser(Object.assign(user, { newPhoto: user.photoURL }))
+        );
       }
     });
   }, [dispatch]);
