@@ -1,14 +1,23 @@
 import { addDoc, collection } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
+import WriteFree from "./WriteFree";
+import WriteVote from "./WriteVote";
 
 const StyledBoard = styled.div`
   width: 70vw;
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
 `;
 
 const Header = styled.header`
@@ -31,53 +40,8 @@ const Header = styled.header`
   }
 `;
 
-const WriteForm = styled.form`
-  height: 1000px;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-
-  select {
-    height: 50px;
-    font-size: 18px;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.textColorOpacity};
-  }
-
-  label {
-    margin-bottom: 10px;
-    margin-top: 50px;
-  }
-
-  input {
-    height: 50px;
-    font-size: 18px;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.textColorOpacity};
-  }
-
-  textarea {
-    resize: none;
-    height: 400px;
-    font-size: 18px;
-    padding-left: 10px;
-    padding-top: 20px;
-    margin-bottom: 50px;
-    border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.textColorOpacity};
-  }
-
-  div {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-  }
-`;
-
 const Write = () => {
-  const [topic, setTopic] = useState("사는얘기");
+  const [topic, setTopic] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [isSubmitting, SetisSubmitting] = useState(false);
@@ -105,8 +69,8 @@ const Write = () => {
       if (topic && title && text) {
         const createdAt = new Date().toLocaleString();
         const data = { topic, title, text, createdAt, displayName, photoURL };
-        await addDoc(collection(db, "free"), data);
-        navigate("/free");
+        await addDoc(collection(db, currentBoard), data);
+        navigate(`/${currentBoard}`);
       }
       if (!topic) alert("토픽을 선택해주세요");
       else if (!title) alert("제목을 입력해주세요");
@@ -122,7 +86,7 @@ const Write = () => {
   return (
     <>
       {displayName ? (
-        <StyledBoard className="BoardMain">
+        <StyledBoard className="Write">
           <Header>
             <h1>함께 할 때 더 즐거운 순간</h1>
             <span>{displayName}</span>
@@ -131,37 +95,35 @@ const Write = () => {
               넓혀보세요.
             </span>
           </Header>
-          <WriteForm onSubmit={onClickAccess}>
-            <label htmlFor="topic">토픽</label>
-            <select onChange={onTopicChange} value={topic} id="topic" required>
-              <option>요즘 이야기</option>
-              <option>모임&스터디</option>
-            </select>
-            <label htmlFor="title">제목</label>
-            <input
-              id="title"
-              placeholder="제목을 입력해주세요."
-              value={title}
-              onChange={onTitleChange}
-              required
+
+          {currentBoard === "free" && (
+            <WriteFree
+              onTopicChange={onTopicChange}
+              topic={topic}
+              title={title}
+              onTitleChange={onTitleChange}
+              text={text}
+              onTextChange={onTextChange}
             />
-            <label htmlFor="text">내용</label>
-            <textarea
-              id="text"
-              placeholder="내용을 입력해주세요."
-              value={text}
-              onChange={onTextChange}
-              required
+          )}
+          {currentBoard === "vote" && (
+            <WriteVote
+              onTopicChange={onTopicChange}
+              topic={topic}
+              title={title}
+              onTitleChange={onTitleChange}
+              text={text}
+              onTextChange={onTextChange}
             />
-            <div>
-              <BtnDefault type="button" onClick={onCancelClick}>
-                취소
-              </BtnDefault>
-              <BtnAccent type="button" onClick={onClickAccess}>
-                등록
-              </BtnAccent>
-            </div>
-          </WriteForm>
+          )}
+          <div>
+            <BtnDefault type="button" onClick={onCancelClick}>
+              취소
+            </BtnDefault>
+            <BtnAccent type="button" onClick={onClickAccess}>
+              등록
+            </BtnAccent>
+          </div>
         </StyledBoard>
       ) : (
         <Navigate to="/login" />
