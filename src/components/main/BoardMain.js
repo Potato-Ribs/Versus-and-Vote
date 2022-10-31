@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../fbase";
 
 const StyledBoard = styled.div`
   width: 33vw;
@@ -63,11 +65,18 @@ const BoardMain = ({ name, path }) => {
   const [itemsForMain, setItemsForMain] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/${path}`)
-      .then((res) => res.json())
-      .then((data) => setItemsForMain(data.slice(0, 5)))
-      .catch((e) => console.log(e));
+    const q = query(collection(db, path), orderBy("createdAt", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      const itemsArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setItemsForMain(itemsArray);
+    });
   }, [path]);
+
+  console.log(itemsForMain);
 
   return (
     <StyledBoard className="BoardMain">
@@ -75,34 +84,41 @@ const BoardMain = ({ name, path }) => {
         <h2 className="board-title-name">{name}게시판</h2>
       </div>
       <ul className="items-containter">
-        {itemsForMain.map((item) => (
-          <li className="item" key={item.id}>
-            <div className="item-detail">
-              <div className="about-author">
-                <img
-                  className="author-avatar"
-                  src={item.authorAvatar}
-                  alt="avatar img"
-                />
-                {`${item.author} · ${item.createdAt}`}
-              </div>
-              <div className="about-item">
-                <div className="item-likes">
-                  <FontAwesomeIcon
-                    className="icon"
-                    icon={regular("thumbs-up")}
-                  />
-                  {item.likes}
+        {itemsForMain.map((item, idx) => {
+          return (
+            idx < 6 && (
+              <li className="item" key={item.id}>
+                <div className="item-detail">
+                  <div className="about-author">
+                    <img
+                      className="author-avatar"
+                      src={item.photoURL}
+                      alt="avatar img"
+                    />
+                    {`${item.displayName} · ${item.createdAt}`}
+                  </div>
+                  <div className="about-item">
+                    <div className="item-likes">
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={regular("thumbs-up")}
+                      />
+                      {item.likes}
+                    </div>
+                    <div className="item-comments">
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={regular("comment")}
+                      />
+                      {item.comments}
+                    </div>
+                  </div>
                 </div>
-                <div className="item-comments">
-                  <FontAwesomeIcon className="icon" icon={regular("comment")} />
-                  {item.comments}
-                </div>
-              </div>
-            </div>
-            <h3 className="item-title">{item.title}</h3>
-          </li>
-        ))}
+                <h3 className="item-title">{item.title}</h3>
+              </li>
+            )
+          );
+        })}
       </ul>
     </StyledBoard>
   );
