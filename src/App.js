@@ -38,7 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
-          <Route path="/board" element={<BoardList />} />
+          <Route path="/vote" element={<BoardList />} />
           <Route path="/balance" element={<BalanceList />} />
           <Route path="/balance/:balanceId" element={<BalanceList />} />
           <Route path="/free" element={<FreeList />} />

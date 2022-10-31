@@ -120,7 +120,7 @@ function Header() {
           )}
         </Link>
         <Ul>
-          <Link to="/board">
+          <Link to="/vote">
             <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
           </Link>
           <Link to="/balance">
