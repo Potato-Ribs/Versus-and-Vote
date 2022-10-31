@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
-import BoardList from "./pages/BoardList";
+import VoteList from "./pages/VoteList";
 import BoardWrite from "./pages/BoardWrite";
 import Profile from "./pages/Profile";
 import FreeList from "./pages/FreeList";
@@ -38,7 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
-          <Route path="/vote" element={<BoardList />} />
+          <Route path="/vote" element={<VoteList />} />
           <Route path="/balance" element={<BalanceList />} />
           <Route path="/balance/:balanceId" element={<BalanceList />} />
           <Route path="/free" element={<FreeList />} />

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Ads from "../components/Ads";
 import Aside from "../components/Aside";
 import List from "../components/board/List";
-import BoardMain from "../components/main/BoardMain";
+import Vote from "../components/board/Vote";
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
 import { useLoading } from "../util/useLoading";
@@ -24,7 +25,7 @@ const Main = styled.main`
   grid-template-columns: 200px auto 200px;
 `;
 
-function BoardList() {
+function VoteList() {
   const [loading, setLoading] = useState(true);
 
   useLoading(setLoading);
@@ -36,7 +37,7 @@ function BoardList() {
         <Header />
         <Main>
           <Aside />
-          <List path="free" />
+          <Vote />
           <Ads />
         </Main>
       </Container>
@@ -44,4 +45,4 @@ function BoardList() {
   );
 }
 
-export default BoardList;
+export default VoteList;
