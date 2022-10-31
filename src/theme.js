@@ -8,10 +8,10 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  bgColor: "black",
+  bgColor: "rgba(33, 58, 71, 1)",
   textColor: "white",
   accentColor: "rgba(0, 144, 248, 1)",
-  bgColorOpacity: "rgba(255, 255, 255, 0.2)",
+  bgColorOpacity: "rgba(25, 45, 55, 1)",
   textColorOpacity: "rgba(255, 255, 255, 0.4)",
   accentColorOpacity: "rgba(0, 144, 248, 0.2)",
 };

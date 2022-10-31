@@ -123,7 +123,9 @@ function Header() {
           <Link to="/board">
             <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
           </Link>
-          <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
+          <Link to="/balance">
+            <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
+          </Link>
           <Link to="/free">
             <Li onClick={() => onBoardClick("free")}>자유 게시판</Li>
           </Link>

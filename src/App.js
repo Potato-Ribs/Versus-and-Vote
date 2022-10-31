@@ -15,6 +15,7 @@ import { getCurrentUser } from "./app/features/currentUserSlice";
 import { auth } from "./fbase";
 import ViewArticle from "./pages/ViewArticle";
 import NotFound from "./components/article/NotFound";
+import BalanceList from "./pages/BalanceList";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,8 @@ function App() {
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
           <Route path="/board" element={<BoardList />} />
+          <Route path="/balance" element={<BalanceList />} />
+          <Route path="/balance/:balanceId" element={<BalanceList />} />
           <Route path="/free" element={<FreeList />} />
           <Route path="/write" element={<BoardWrite />} />
           <Route path="/profile" element={<Profile />} />
