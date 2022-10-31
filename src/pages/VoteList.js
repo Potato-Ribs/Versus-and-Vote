@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import styled from "styled-components";
 import Ads from "../components/Ads";
 import Aside from "../components/Aside";
-import List from "../components/board/List";
 import Vote from "../components/board/Vote";
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
