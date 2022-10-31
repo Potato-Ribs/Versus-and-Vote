@@ -12,6 +12,8 @@ const StyledBoard = styled.div`
   box-sizing: border-box;
   min-width: 700px;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
 
   .board-title {
     height: 90px;
@@ -213,11 +215,11 @@ const PageNav = styled.div`
   }
 `;
 
-const Free = () => {
+const Vote = () => {
   const [itemsForBoard, setItemsForBoard] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "free"), orderBy("createdAt", "desc"));
+    const q = query(collection(db, "vote"), orderBy("createdAt", "desc"));
 
     onSnapshot(q, (snapshot) => {
       const itemsArray = snapshot.docs.map((doc) => ({
@@ -231,7 +233,7 @@ const Free = () => {
   console.log(itemsForBoard);
 
   return (
-    <StyledBoard className="Free">
+    <StyledBoard className="Vote">
       <div className="board-title">
         <h2 className="board-title-name">자유 게시판</h2>
       </div>
@@ -323,4 +325,4 @@ const Free = () => {
   );
 };
 
-export default Free;
+export default Vote;
