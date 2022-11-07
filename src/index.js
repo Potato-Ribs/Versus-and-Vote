@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle } from "styled-components";
 import App from "./App";
 import store, { persistor } from "./app/store";
+import Footer from "./components/footer/Footer";
 
 export const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -63,6 +64,7 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
+        <Footer />
       </PersistGate>
     </Provider>
   </React.StrictMode>
