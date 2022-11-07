@@ -10,7 +10,7 @@ export const BtnAccent = styled.button`
   border: none;
 
   &:hover {
-    background-color: ${(props) => props.theme.textColorOpacity};
+    background-color: ${(props) => props.theme.textColor};
     cursor: pointer;
   }
 `;
