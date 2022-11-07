@@ -71,16 +71,16 @@ const StyledBoard = styled.div`
 
     form {
       input {
-        width: 200px;
+        width: 240px;
         height: 40px;
         border: 1px solid black;
         border-radius: 20px;
-        padding: 0 35px;
+        padding: 0 55px;
       }
 
       button {
         position: relative;
-        left: 35px;
+        left: 45px;
         border: none;
         background-color: white;
         font-size: 16px;
@@ -151,6 +151,7 @@ const ItemMid = styled.div`
 
   h1 {
     font-weight: 600;
+    color: ${(props) => props.theme.textColor};
   }
 `;
 
@@ -281,7 +282,7 @@ const Balance = () => {
   const [curItem, setCurItem] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
-  const balanceMatch = useMatch("/balance/:balanceId");
+  const balanceMatch = useMatch("/:balanceId");
   const { scrollY } = useScroll();
 
   const onOverlayClick = () => navigate(-1);
@@ -311,29 +312,7 @@ const Balance = () => {
         <Link to="/write">
           <BtnAccent>✏️ 작성하기</BtnAccent>
         </Link>
-        <ul className="board-tab">
-          <li>기술</li>
-          <li>커리어</li>
-          <li>기타</li>
-          <li>전체</li>
-        </ul>
         <BtnDefault>⬇️ 최신순</BtnDefault>
-      </div>
-      <hr />
-      <div className="board-list-util">
-        <button>🔄</button>
-        <form>
-          <button>🔎</button>
-          <input placeholder="커뮤니티 내에서 검색" />
-        </form>
-        <div>
-          <div>
-            <span>1 </span>
-            <span>/ 11732 페이지</span>
-          </div>
-          <button>⬅️</button>
-          <button>➡️</button>
-        </div>
       </div>
       <hr />
       <ul className="items-containter">
@@ -341,8 +320,9 @@ const Balance = () => {
           <>
             <li className="item" key={item.id}>
               <Link
-                to={"/balance/" + item.id}
+                to={"/" + item.id}
                 onClick={() => onClickBalance(item)}
+                style={{ textDecoration: "none" }}
               >
                 <ItemMid>
                   <h1>{item.title}</h1>
@@ -373,39 +353,6 @@ const Balance = () => {
           </>
         ))}
       </ul>
-      <PageNav>
-        <div>
-          <span>←</span>
-          <span>Previous</span>
-        </div>
-        <ul>
-          <li>
-            <span>1</span>
-          </li>
-          <li>
-            <span>2</span>
-          </li>
-          <li>
-            <span>3</span>
-          </li>
-          <li>
-            <span>4</span>
-          </li>
-          <li>
-            <span>5</span>
-          </li>
-          <li>
-            <span>...</span>
-          </li>
-          <li>
-            <span>535</span>
-          </li>
-        </ul>
-        <div>
-          <span>→</span>
-          <span>Next</span>
-        </div>
-      </PageNav>
       <AnimatePresence>
         {balanceMatch ? (
           <>

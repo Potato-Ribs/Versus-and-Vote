@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const isDarkSlice = createSlice({
   name: "isDarkSlice",
-  initialState: { value: false },
+  initialState: { value: true },
   reducers: {
     click: (state) => {
       state.value = !state.value;

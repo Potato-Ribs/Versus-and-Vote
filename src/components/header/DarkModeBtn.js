@@ -8,6 +8,10 @@ const Toggle = styled.button`
   border: none;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 function DarkModeBtn() {
@@ -15,7 +19,7 @@ function DarkModeBtn() {
   const isDark = useSelector((state) => state.isDark.value);
 
   return (
-    <Toggle onClick={() => dispatch(click())}>{isDark ? "☀️" : "🌙"}</Toggle>
+    <Toggle onClick={() => dispatch(click())}>{isDark ? "🌙" : "☀️"}</Toggle>
   );
 }
 

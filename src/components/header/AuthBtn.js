@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 10px;
 `;
 
 const LoginBtn = styled.button`
@@ -11,6 +11,10 @@ const LoginBtn = styled.button`
   width: 80px;
   border: 1px solid blue;
   border-radius: 20px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const JoinBtn = styled(LoginBtn)`
