@@ -7,10 +7,13 @@ import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
 import {
   collection,
-  limit,
   onSnapshot,
   orderBy,
   query,
+  doc,
+  updateDoc,
+  increment,
+  limit,
   startAfter,
 } from "firebase/firestore";
 import { db } from "../../fbase";
@@ -24,7 +27,8 @@ const StyledBoard = styled.div`
 
   .board-title {
     height: 90px;
-    background-color: lightgray;
+    color: ${(props) => props.theme.textColor};
+    background-color: ${(props) => props.theme.textColorOpacity};
     border-radius: 0.75rem;
     display: flex;
     justify-content: center;
@@ -126,7 +130,7 @@ const StyledBoard = styled.div`
       margin: 30px 0;
 
       &:last-child {
-        margin-top: 100px;
+        margin-top: 50px;
         margin-bottom: 0px;
       }
     }
@@ -294,7 +298,10 @@ const Balance = () => {
   const { scrollY } = useScroll();
   const [lastVisible, setLastVisible] = useState();
 
-  const onOverlayClick = () => navigate(-1);
+  const onOverlayClick = () => {
+    navigate(-1);
+    setTimeout(() => setIsSubmit(false), 1000);
+  };
 
   const getNextPosts = () => {
     let q;
@@ -346,6 +353,23 @@ const Balance = () => {
     setCurItem(item);
   };
 
+  const onPlusNum = async (id, field) => {
+    const ref = doc(db, "balance", id);
+
+    await updateDoc(ref, {
+      [field]: increment(1),
+    });
+
+    onSnapshot(doc(db, "balance", id), (doc) => {
+      setCurItem(doc.data());
+    });
+  };
+
+  const onClickAnswer = async (id, field) => {
+    await onPlusNum(id, field);
+    setIsSubmit(true);
+  };
+
   return (
     <StyledBoard className="BoardMain">
       <div className="board-title">
@@ -360,8 +384,8 @@ const Balance = () => {
       <hr />
       <ul className="items-containter">
         {itemsForBalance.map((item) => (
-          <>
-            <li className="item" key={item.id}>
+          <div key={item.id}>
+            <li className="item">
               <Link
                 to={"/" + item.id}
                 onClick={() => onClickBalance(item)}
@@ -393,7 +417,7 @@ const Balance = () => {
               </ItemBot>
             </li>
             <hr />
-          </>
+          </div>
         ))}
       </ul>
       <AnimatePresence>
@@ -417,17 +441,37 @@ const Balance = () => {
               </ModalTop>
               <hr />
               <ModalMid>
-                <AnswerBox>{curItem.leftStr}</AnswerBox>
+                <AnswerBox onClick={() => onClickAnswer(curItem.id, "leftNum")}>
+                  {curItem.leftStr}
+                </AnswerBox>
+                {isSubmit && <span>{curItem.leftNum}</span>}
                 <VersusBox>vs</VersusBox>
-                <AnswerBox>{curItem.rightStr}</AnswerBox>
+                {isSubmit && <span>{curItem.rightNum}</span>}
+                <AnswerBox
+                  onClick={() => onClickAnswer(curItem.id, "rightNum")}
+                >
+                  {curItem.rightStr}
+                </AnswerBox>
               </ModalMid>
               <ModalBot>
-                <EmojiBox>{`Love ${curItem.emjLove}`}</EmojiBox>
-                <EmojiBox>{`Good ${curItem.emjGood}`}</EmojiBox>
-                <EmojiBox>{`Funny ${curItem.emjFunny}`}</EmojiBox>
-                <EmojiBox>{`Sad ${curItem.emjSad}`}</EmojiBox>
-                <EmojiBox>{`Dizzy ${curItem.emjDizzy}`}</EmojiBox>
-                <EmojiBox>{`Bad ${curItem.emjBad}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjLove")}
+                >{`Love ${curItem.emjLove}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjGood")}
+                >{`Good ${curItem.emjGood}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjFunny")}
+                >{`Funny ${curItem.emjFunny}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjSad")}
+                >{`Sad ${curItem.emjSad}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjDizzy")}
+                >{`Dizzy ${curItem.emjDizzy}`}</EmojiBox>
+                <EmojiBox
+                  onClick={() => onPlusNum(curItem.id, "emjBad")}
+                >{`Bad ${curItem.emjBad}`}</EmojiBox>
               </ModalBot>
             </ArticleModal>
           </>

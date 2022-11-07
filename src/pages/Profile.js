@@ -8,6 +8,7 @@ import Input from "../components/Input";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../app/features/currentUserSlice";
+import { BtnAccent } from "../components/button/BtnAccent";
 
 const StyledProfile = styled.div`
   box-sizing: border-box;
@@ -23,17 +24,23 @@ const StyledProfile = styled.div`
     width: 100%;
     max-width: 40rem;
     display: grid;
+
+    input {
+      margin: 40px 0;
+    }
   }
   .title {
     font-size: 2rem;
     font-weight: 600;
+    margin: 40px 0;
   }
   .name-setting {
     grid-row: 2/3;
+    margin-bottom: 100px;
   }
   .avatar-setting {
-    width: 10rem;
-    height: 10rem;
+    width: 13rem;
+    height: 13rem;
     border-radius: 50%;
     align-self: center;
     justify-self: end;
@@ -100,6 +107,8 @@ const Profile = () => {
       <Header />
       <form className="profile-container" onSubmit={onSubmitHandle}>
         <h1 className="title">회원정보</h1>
+        <img className="avatar-setting" src={newPhoto} alt="회원 이미지" />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <div className="name-setting">
           <Input
             label="이름"
@@ -107,9 +116,7 @@ const Profile = () => {
             setInput={setDisplayName}
           />
         </div>
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <img className="avatar-setting" src={newPhoto} alt="회원 이미지" />
-        <button className="save-profile">저장</button>
+        <BtnAccent className="save-profile">저장</BtnAccent>
       </form>
     </StyledProfile>
   );
