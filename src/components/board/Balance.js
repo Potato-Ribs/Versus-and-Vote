@@ -311,14 +311,14 @@ const Balance = () => {
       q = query(
         collection(db, "balance"),
         orderBy("createdAt", "desc"),
-        limit(5),
+        limit(4),
         startAfter(lastVisible)
       );
     } else {
       q = query(
         collection(db, "balance"),
         orderBy("createdAt", "desc"),
-        limit(20)
+        limit(10)
       );
     }
 
