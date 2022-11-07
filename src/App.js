@@ -35,17 +35,17 @@ function App() {
       <GlobalStyle />
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<BalanceList />} />
+          <Route path="/:balanceId" element={<BalanceList />} />
           <Route path="/login" element={<SignInAndUp />} />
           <Route path="/join" element={<SignInAndUp />} />
-          <Route path="/board" element={<BoardList />} />
-          <Route path="/balance" element={<BalanceList />} />
-          <Route path="/balance/:balanceId" element={<BalanceList />} />
-          <Route path="/free" element={<FreeList />} />
           <Route path="/write" element={<BoardWrite />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/article/:id" element={<ViewArticle />} />
-          <Route path="/article/:id" element={<NotFound />} />
+          {/* <Route path="/board" element={<BoardList />} /> */}
+          {/* <Route path="/balance" element={<BalanceList />} /> */}
+          {/* <Route path="/free" element={<FreeList />} /> */}
+          {/* <Route path="/article/:id" element={<ViewArticle />} /> */}
+          {/* <Route path="/article/:id" element={<NotFound />} /> */}
         </Routes>
       </Router>
     </ThemeProvider>

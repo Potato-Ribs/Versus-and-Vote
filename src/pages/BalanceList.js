@@ -9,19 +9,18 @@ import Loading from "../components/Loading";
 import { useLoading } from "../util/useLoading";
 
 const Container = styled.div`
-  height: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Main = styled.main`
-  width: 99vw;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: 200px auto 200px;
+  min-width: 60vw;
+  max-width: 80vw;
+  margin: 40px auto;
 `;
 
 function BalanceList() {
@@ -35,9 +34,7 @@ function BalanceList() {
       <Container>
         <Header />
         <Main>
-          <Aside />
           <Balance />
-          <Ads />
         </Main>
       </Container>
     </>
