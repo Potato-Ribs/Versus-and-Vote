@@ -226,7 +226,7 @@ const Overlay = styled(motion.div)`
 
 const ArticleModal = styled(motion.div)`
   position: absolute;
-  width: 700px;
+  width: 1050px;
   height: 300px;
   left: 0;
   right: 0;
@@ -243,7 +243,7 @@ const ArticleModal = styled(motion.div)`
 
 const ModalTop = styled.div`
   h1 {
-    font-size: 32px;
+    font-size: 26px;
     text-align: center;
     font-weight: 500;
   }
@@ -263,15 +263,21 @@ const ModalBot = styled.div`
 `;
 
 const AnswerBox = styled.div`
-  padding: 30px;
+  padding: 60px 30px;
   border-radius: 15px;
   border: 1px solid ${(props) => props.theme.textColorOpacity};
-  font-size: 18px;
+  font-size: 26px;
 
   &:hover {
     cursor: pointer;
     background-color: ${(props) => props.theme.bgColorOpacity};
   }
+`;
+
+const AnswerSpan = styled.span`
+  font-size: 26px;
+  color: ${(props) =>
+    props.isBigger ? props.theme.accentColor : props.theme.textColor};
 `;
 
 const VersusBox = styled.div`
@@ -395,22 +401,7 @@ const Balance = () => {
               </Link>
               <ItemBot>
                 <div>
-                  <span>{`Love ${item.emjLove}`}</span>
-                </div>
-                <div>
-                  <span>{`Good ${item.emjGood}`}</span>
-                </div>
-                <div>
-                  <span>{`Funny ${item.emjFunny}`}</span>
-                </div>
-                <div>
-                  <span>{`Sad ${item.emjSad}`}</span>
-                </div>
-                <div>
-                  <span>{`Dizzy ${item.emjDizzy}`}</span>
-                </div>
-                <div>
-                  <span>{`Bad ${item.emjBad}`}</span>
+                  <span>{`총 투표수 : ${item.leftNum + item.rightNum}`}</span>
                 </div>
               </ItemBot>
             </li>
@@ -442,35 +433,24 @@ const Balance = () => {
                 <AnswerBox onClick={() => onClickAnswer(curItem.id, "leftNum")}>
                   {curItem.leftStr}
                 </AnswerBox>
-                {isSubmit && <span>{curItem.leftNum}</span>}
+                {isSubmit && (
+                  <AnswerSpan isBigger={curItem.leftNum >= curItem.rightNum}>
+                    {curItem.leftNum}
+                  </AnswerSpan>
+                )}
                 <VersusBox>vs</VersusBox>
-                {isSubmit && <span>{curItem.rightNum}</span>}
+                {isSubmit && (
+                  <AnswerSpan isBigger={curItem.rightNum >= curItem.leftNum}>
+                    {curItem.rightNum}
+                  </AnswerSpan>
+                )}
                 <AnswerBox
                   onClick={() => onClickAnswer(curItem.id, "rightNum")}
                 >
                   {curItem.rightStr}
                 </AnswerBox>
               </ModalMid>
-              <ModalBot>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjLove")}
-                >{`Love ${curItem.emjLove}`}</EmojiBox>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjGood")}
-                >{`Good ${curItem.emjGood}`}</EmojiBox>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjFunny")}
-                >{`Funny ${curItem.emjFunny}`}</EmojiBox>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjSad")}
-                >{`Sad ${curItem.emjSad}`}</EmojiBox>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjDizzy")}
-                >{`Dizzy ${curItem.emjDizzy}`}</EmojiBox>
-                <EmojiBox
-                  onClick={() => onPlusNum(curItem.id, "emjBad")}
-                >{`Bad ${curItem.emjBad}`}</EmojiBox>
-              </ModalBot>
+              <ModalBot></ModalBot>
             </ArticleModal>
           </>
         ) : null}
