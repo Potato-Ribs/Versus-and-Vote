@@ -72,16 +72,16 @@ const StyledBoard = styled.div`
 
     form {
       input {
-        width: 200px;
+        width: 240px;
         height: 40px;
         border: 1px solid black;
         border-radius: 20px;
-        padding: 0 35px;
+        padding: 0 55px;
       }
 
       button {
         position: relative;
-        left: 35px;
+        left: 45px;
         border: none;
         background-color: white;
         font-size: 16px;
@@ -241,12 +241,6 @@ const Vote = () => {
         <Link to="/write">
           <BtnAccent>✏️ 작성하기</BtnAccent>
         </Link>
-        <ul className="board-tab">
-          <li>기술</li>
-          <li>커리어</li>
-          <li>기타</li>
-          <li>전체</li>
-        </ul>
         <BtnDefault>⬇️ 최신순</BtnDefault>
       </div>
       <hr />

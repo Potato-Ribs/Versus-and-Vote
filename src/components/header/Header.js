@@ -30,6 +30,10 @@ const Container = styled.header`
     border-radius: 50%;
     position: relative;
     margin-left: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
   .user-setting-list {
     width: 5rem;
@@ -42,8 +46,10 @@ const Container = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${(props) => props.theme.textColor};
     :hover {
       background-color: gray;
+      cursor: pointer;
     }
   }
 `;
@@ -63,6 +69,9 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   white-space: nowrap;
+  text-decoration: none;
+  color: ${(props) => props.theme.textColor};
+  list-style: none;
 `;
 
 const Logo = styled.img`
@@ -120,14 +129,8 @@ function Header() {
           )}
         </Link>
         <Ul>
-          <Link to="/vote">
-            <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
-          </Link>
-          <Link to="/balance">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
-          </Link>
-          <Link to="/free">
-            <Li onClick={() => onBoardClick("free")}>자유 게시판</Li>
           </Link>
         </Ul>
       </Nav>
@@ -144,7 +147,7 @@ function Header() {
             />
             {toggle && (
               <div className="user-setting-list">
-                <Link to="/profile">
+                <Link to="/profile" style={{ textDecoration: "none" }}>
                   <div className="setting-item">내 프로필</div>
                 </Link>
                 <div className="setting-item" onClick={() => onLogoutClick()}>

@@ -71,7 +71,8 @@ const StyledSignInAndUp = styled.div`
     align-items: center;
     box-shadow: 1px 1px 5px grey;
     :hover {
-      background-color: #f5f9ff;
+      background-color: ${(props) => props.theme.bgColorOpacity};
+      cursor: pointer;
     }
   }
   .signIn-form {
@@ -81,6 +82,14 @@ const StyledSignInAndUp = styled.div`
   .signUp {
     align-self: center;
     margin-top: 1.3rem;
+
+    span {
+      color: ${(props) => props.theme.textColor};
+
+      :hover {
+        color: ${(props) => props.theme.textColorOpacity};
+      }
+    }
   }
   .validation {
     font-size: 0.9rem;
@@ -296,13 +305,17 @@ const SignInAndUp = () => {
               <p className="signUp">
                 {isSigningUp ? (
                   <>
-                    <span>이미 회원이신가요?</span>
-                    <Link to="/login">로그인</Link>
+                    이미 회원이신가요?
+                    <Link to="/login" style={{ textDecoration: "none" }}>
+                      <span> 로그인</span>
+                    </Link>
                   </>
                 ) : (
                   <>
-                    <span>아직 회원이 아니신가요?</span>
-                    <Link to="/join">회원가입</Link>
+                    아직 회원이 아니신가요?
+                    <Link to="/join" style={{ textDecoration: "none" }}>
+                      <span> 회원가입</span>
+                    </Link>
                   </>
                 )}
               </p>

@@ -11,7 +11,7 @@ const Input = styled.input`
   height: 40px;
   border: 1px solid black;
   border-radius: 20px;
-  padding: 0 35px;
+  padding: 0 50px;
   position: relative;
   grid-column: 1/2;
   grid-row: 1/2;
@@ -22,7 +22,7 @@ const Button = styled.button`
   height: fit-content;
   align-self: center;
   border: none;
-  margin-left: 10px;
+  margin-left: 20px;
   background-color: white;
   grid-column: 1/2;
   grid-row: 1/2;
