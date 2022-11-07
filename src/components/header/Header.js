@@ -37,7 +37,7 @@ const Container = styled.header`
   }
   .user-setting-list {
     width: 5rem;
-    background-color: orange;
+    background-color: ${(props) => props.theme.textColorOpacity};
     position: absolute;
     z-index: 1;
   }
@@ -46,9 +46,9 @@ const Container = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.bgColor};
     :hover {
-      background-color: gray;
+      background-color: ${(props) => props.theme.textColor};
       cursor: pointer;
     }
   }
