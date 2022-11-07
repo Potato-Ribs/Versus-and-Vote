@@ -1,11 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
-import Ads from "../components/Ads";
-import Aside from "../components/Aside";
 import Write from "../components/board/Write";
-import Free from "../components/board/Free";
 import Header from "../components/header/Header";
-import Loading from "../components/Loading";
 import { useLoading } from "../util/useLoading";
 
 const Container = styled.div`
@@ -24,20 +19,13 @@ const Main = styled.main`
 `;
 
 function BalanceList() {
-  const [loading, setLoading] = useState(true);
-
-  useLoading(setLoading);
-
   return (
-    <>
-      {loading ? <Loading /> : null}
-      <Container>
-        <Header />
-        <Main>
-          <Write />
-        </Main>
-      </Container>
-    </>
+    <Container>
+      <Header />
+      <Main>
+        <Write />
+      </Main>
+    </Container>
   );
 }
 
