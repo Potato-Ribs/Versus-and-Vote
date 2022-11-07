@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignInAndUp from "./pages/SignInAndUp";
-import BoardList from "./pages/BoardList";
+import VoteList from "./pages/VoteList";
 import BoardWrite from "./pages/BoardWrite";
 import Profile from "./pages/Profile";
 import FreeList from "./pages/FreeList";

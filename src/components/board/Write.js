@@ -6,9 +6,18 @@ import styled from "styled-components";
 import { db } from "../../fbase";
 import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
+import WriteFree from "./WriteFree";
+import WriteVote from "./WriteVote";
 
 const StyledBoard = styled.div`
   width: 70vw;
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
 `;
 
 const Header = styled.header`
@@ -137,7 +146,7 @@ const Write = () => {
   return (
     <>
       {displayName ? (
-        <StyledBoard className="BoardMain">
+        <StyledBoard className="Write">
           <Header>
             <h1>함께 할 때 더 즐거운 순간</h1>
             <span>{displayName}</span>

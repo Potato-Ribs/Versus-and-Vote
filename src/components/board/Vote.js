@@ -5,11 +5,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../fbase";
 
 const StyledBoard = styled.div`
   box-sizing: border-box;
   min-width: 700px;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
 
   .board-title {
     height: 90px;
@@ -119,6 +123,10 @@ const StyledBoard = styled.div`
         margin-bottom: 0px;
       }
     }
+
+    li {
+      padding: 30px 0px;
+    }
   }
 `;
 
@@ -149,27 +157,26 @@ const ItemMid = styled.div`
 
 const ItemBot = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 18px;
   color: ${(props) => props.theme.textColorOpacity};
   height: 22px;
+  gap: 10px;
 
-  div:first-child {
+  div:last-child {
     display: flex;
     align-items: center;
     gap: 15px;
-
-    div {
-      font-size: 14px;
-      padding: 5px 15px;
-      border-radius: 5px;
-      color: ${(props) => props.theme.accentColor};
-      background-color: ${(props) => props.theme.accentColorOpacity};
-    }
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: ${(props) => props.theme.accentColor};
+    background-color: ${(props) => props.theme.accentColorOpacity};
   }
 
-  div:last-child {
+  div:first-child {
     display: flex;
     gap: 15px;
     font-size: 20px;
@@ -208,20 +215,27 @@ const PageNav = styled.div`
   }
 `;
 
-const List = ({ path }) => {
+const Vote = () => {
   const [itemsForBoard, setItemsForBoard] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/${path}`)
-      .then((res) => res.json())
-      .then((data) => setItemsForBoard(data.slice(0, 20)))
-      .catch((e) => console.log(e));
-  }, [path]);
+    const q = query(collection(db, "vote"), orderBy("createdAt", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      const itemsArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setItemsForBoard(itemsArray);
+    });
+  }, []);
+
+  console.log(itemsForBoard);
 
   return (
-    <StyledBoard className="List">
+    <StyledBoard className="Vote">
       <div className="board-title">
-        <h2 className="board-title-name">투표 게시판</h2>
+        <h2 className="board-title-name">자유 게시판</h2>
       </div>
       <div className="board-util">
         <Link to="/write">
@@ -250,37 +264,17 @@ const List = ({ path }) => {
         {itemsForBoard.map((item) => (
           <>
             <li className="item" key={item.id}>
-              <ItemTop>
-                <img src={item.authorAvatar} alt="avatar img" />
-                <span>{`${item.author} · ${item.createdAt}`}</span>
-              </ItemTop>
-              <ItemMid>
-                <h1>{item.title}</h1>
-              </ItemMid>
+              <Link to={"/article/" + item.id}>
+                <ItemMid>
+                  <h1>{item.title}</h1>
+                </ItemMid>
+              </Link>
               <ItemBot>
                 <div>
-                  <div>
-                    <span>{item.category}</span>
-                  </div>
-                  {item.tags.map((tag) => (
-                    <span>{`#${tag}`}</span>
-                  ))}
+                  <span>{item.text}</span>
                 </div>
                 <div>
-                  <span>
-                    <FontAwesomeIcon
-                      className="icon"
-                      icon={regular("thumbs-up")}
-                    />
-                    {item.likes}
-                  </span>
-                  <span>
-                    <FontAwesomeIcon
-                      className="icon"
-                      icon={regular("comment")}
-                    />
-                    {item.comments}
-                  </span>
+                  <span>{item.topic}</span>
                 </div>
               </ItemBot>
             </li>
@@ -325,4 +319,4 @@ const List = ({ path }) => {
   );
 };
 
-export default List;
+export default Vote;

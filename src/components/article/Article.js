@@ -2,6 +2,7 @@ import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../../fbase";
@@ -60,14 +61,15 @@ const StyledArticle = styled.div`
 const Article = () => {
   const [articleData, setArticleData] = useState();
   const articleId = useParams().id;
+  const currentBoard = useSelector((state) => state.currentBoard.value);
 
   useEffect(() => {
-    const articleRef = doc(db, "free", articleId);
+    const articleRef = doc(db, currentBoard, articleId);
     return async () => {
       const articleSnap = await getDoc(articleRef);
       setArticleData(articleSnap.data());
     };
-  }, [articleId]);
+  }, [currentBoard, articleId]);
 
   // voteData > content > text : max-legnth 40
   const voteData = {

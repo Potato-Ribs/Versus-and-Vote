@@ -231,7 +231,7 @@ const Free = () => {
   console.log(itemsForBoard);
 
   return (
-    <StyledBoard className="BoardMain">
+    <StyledBoard className="Free">
       <div className="board-title">
         <h2 className="board-title-name">자유 게시판</h2>
       </div>
