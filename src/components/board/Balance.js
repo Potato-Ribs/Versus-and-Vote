@@ -314,14 +314,12 @@ const Balance = () => {
         limit(2),
         startAfter(lastVisible)
       );
-      console.log("firstquery");
     } else {
       q = query(
         collection(db, "balance"),
         orderBy("createdAt", "desc"),
         limit(4)
       );
-      console.log("secondquery");
     }
 
     onSnapshot(q, (snapshot) => {
