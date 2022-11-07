@@ -311,7 +311,7 @@ const Balance = () => {
       q = query(
         collection(db, "balance"),
         orderBy("createdAt", "desc"),
-        limit(1),
+        limit(2),
         startAfter(lastVisible)
       );
       console.log("firstquery");
@@ -319,7 +319,7 @@ const Balance = () => {
       q = query(
         collection(db, "balance"),
         orderBy("createdAt", "desc"),
-        limit(2)
+        limit(4)
       );
       console.log("secondquery");
     }
