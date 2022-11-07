@@ -5,9 +5,17 @@ import { useEffect, useState } from "react";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import { BtnAccent } from "../button/BtnAccent";
 import { BtnDefault } from "../button/BtnDefault";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  startAfter,
+} from "firebase/firestore";
 import { db } from "../../fbase";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
 
 const StyledBoard = styled.div`
   box-sizing: border-box;
@@ -284,19 +292,54 @@ const Balance = () => {
   const navigate = useNavigate();
   const balanceMatch = useMatch("/:balanceId");
   const { scrollY } = useScroll();
+  const [lastVisible, setLastVisible] = useState();
 
   const onOverlayClick = () => navigate(-1);
 
-  useEffect(() => {
-    const q = query(collection(db, "balance"), orderBy("createdAt", "desc"));
+  const getNextPosts = () => {
+    let q;
+    if (lastVisible === -1) {
+      return;
+    } else if (lastVisible) {
+      q = query(
+        collection(db, "balance"),
+        orderBy("createdAt", "desc"),
+        limit(1),
+        startAfter(lastVisible)
+      );
+      console.log("firstquery");
+    } else {
+      q = query(
+        collection(db, "balance"),
+        orderBy("createdAt", "desc"),
+        limit(2)
+      );
+      console.log("secondquery");
+    }
 
     onSnapshot(q, (snapshot) => {
-      const itemsArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setItemsForBalance(itemsArray);
+      setItemsForBalance((pre) => {
+        const arr = [...pre];
+        snapshot.forEach((doc) => {
+          if (arr.filter((el) => el.id === doc.id).length === 0) {
+            arr.push({ id: doc.id, ...doc.data() });
+          }
+        });
+        return arr;
+      });
+
+      if (snapshot.docs.length === 0) {
+        setLastVisible(-1);
+      } else {
+        setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
+      }
     });
+  };
+
+  useBottomScrollListener(getNextPosts);
+
+  useEffect(() => {
+    getNextPosts();
   }, []);
 
   const onClickBalance = (item) => {
