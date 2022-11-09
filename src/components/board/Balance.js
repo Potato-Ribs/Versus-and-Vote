@@ -300,7 +300,7 @@ const Balance = () => {
   const [curItem, setCurItem] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
-  const balanceMatch = useMatch("/:balanceId");
+  const balanceMatch = useMatch("/balance/:balanceId");
   const { scrollY } = useScroll();
   const [lastVisible, setLastVisible] = useState();
 
