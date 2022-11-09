@@ -129,8 +129,14 @@ function Header() {
           )}
         </Link>
         <Ul>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/balance" style={{ textDecoration: "none" }}>
             <Li onClick={() => onBoardClick("balance")}>밸런스 게임</Li>
+          </Link>
+          <Link to="/vote" style={{ textDecoration: "none" }}>
+            <Li onClick={() => onBoardClick("vote")}>투표 게시판</Li>
+          </Link>
+          <Link to="/free" style={{ textDecoration: "none" }}>
+            <Li onClick={() => onBoardClick("free")}>자유 게시판</Li>
           </Link>
         </Ul>
       </Nav>

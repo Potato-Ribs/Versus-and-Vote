@@ -68,7 +68,7 @@ const Footer = () => {
         </div>
         <div>
           <div className="footer-contents">
-            <div>이메일: qwevvv2003@daum.net, coder.2pandi@gmail.com</div>
+            <div>이메일: yeonwoopark22@gmail.com, coder.2pandi@gmail.com</div>
             <div>디스코드: SEB_FE_40_박연우#5385, SEB_FE_40_이예빈#2999</div>
           </div>
         </div>

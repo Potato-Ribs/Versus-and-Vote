@@ -15,6 +15,7 @@
     "babel-plugin-macros": "^3.1.0",
     "firebase": "^9.10.0",
     "framer-motion": "^7.6.2",
+    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-bottom-scroll-listener": "^5.1.0",
     "react-dom": "^18.2.0",
@@ -30,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "cd data && json-server --watch data.json --port 3001"
+    "server": "cd data && json-server --watch data.json --port 3001",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
