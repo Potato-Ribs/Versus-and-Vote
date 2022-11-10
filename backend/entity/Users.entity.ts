@@ -2,6 +2,8 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Up
 import { Balances } from './Balances.entity';
 import { BalanceCounts } from './BalanceCounts.entity';
 import { BalanceLikes } from './BalanceLikes.entity';
+import { Boards } from './Boards.entity';
+import { BoardLikes } from './BoardLikes.entity';
 
 @Entity('users')
 export class Users {
@@ -28,4 +30,10 @@ export class Users {
 
     @OneToMany(() => BalanceLikes, balanceLikes => balanceLikes.Users)
     BalanceLikes: BalanceLikes[];
+
+    @OneToMany(() => Boards, boards => boards.Users)
+    Boards: Boards[];
+
+    @OneToMany(() => BoardLikes, boardLikes => boardLikes.Users)
+    BoardLikes: BoardLikes[];
 }

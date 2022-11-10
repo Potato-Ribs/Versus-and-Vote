@@ -9,6 +9,9 @@ import { Balances } from '../entity/Balances.entity';
 import { BalanceContents } from '../entity/BalanceContents.entity';
 import { BalanceLikes } from '../entity/BalanceLikes.entity';
 import { BalanceCounts } from '../entity/BalanceCounts.entity';
+import { Boards } from '../entity/Boards.entity';
+import { BoardLikes } from '../entity/BoardLikes.entity';
+import { Topics } from '../entity/Topics.entity';
 
 @Module({
     imports: [
@@ -23,7 +26,16 @@ import { BalanceCounts } from '../entity/BalanceCounts.entity';
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_DATABASE'),
-                    entities: [Users, Balances, BalanceContents, BalanceLikes, BalanceCounts],
+                    entities: [
+                        Users,
+                        Balances,
+                        BalanceContents,
+                        BalanceLikes,
+                        BalanceCounts,
+                        Boards,
+                        BoardLikes,
+                        Topics,
+                    ],
                     autoLoadEntities: true,
                     charset: 'utf8mb4',
                     synchronize: true,
