@@ -24,6 +24,6 @@ export class BalanceCounts {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     })
-    @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+    @JoinColumn([{ name: 'BalanceContentId', referencedColumnName: 'id' }])
     BalanceContents: BalanceContents;
 }

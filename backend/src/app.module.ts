@@ -4,6 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OauthModule } from './oauth/oauth.module';
+import { Users } from '../entity/Users.entity';
+import { Balances } from '../entity/Balances.entity';
+import { BalanceContents } from '../entity/BalanceContents.entity';
+import { BalanceLikes } from '../entity/BalanceLikes.entity';
+import { BalanceCounts } from '../entity/BalanceCounts.entity';
 
 @Module({
     imports: [
@@ -18,7 +23,7 @@ import { OauthModule } from './oauth/oauth.module';
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_DATABASE'),
-                    entities: [],
+                    entities: [Users, Balances, BalanceContents, BalanceLikes, BalanceCounts],
                     autoLoadEntities: true,
                     charset: 'utf8mb4',
                     synchronize: true,
