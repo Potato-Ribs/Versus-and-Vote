@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { OauthModule } from './oauth/oauth.module';
 
 @Module({
     imports: [
@@ -26,6 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
                 };
             },
         }),
+        OauthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
