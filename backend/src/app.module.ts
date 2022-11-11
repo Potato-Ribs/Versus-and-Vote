@@ -51,8 +51,7 @@ import { BoardsModule } from './boards/boards.module';
                     autoLoadEntities: true,
                     charset: 'utf8mb4',
                     synchronize: true,
-                    logging: true, // query 날리는것 로깅
-                    // keepConnectionAlive: true, //hot reloading 할때 필요
+                    logging: true,
                 };
             },
         }),
