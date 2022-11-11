@@ -2,14 +2,12 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import { Users } from './Users.entity';
 import { BalanceContents } from './BalanceContents.entity';
 import { Balances } from './Balances.entity';
+import { BalanceCategories } from './BalanceCategories.entity';
 
 @Entity('balanceLikes')
 export class BalanceLikes {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
     id: number;
-
-    @Column('varchar', { name: 'name' })
-    name: string;
 
     @Column('int', { name: 'UserId', nullable: true })
     UserId: number;
@@ -30,4 +28,14 @@ export class BalanceLikes {
     })
     @JoinColumn([{ name: 'BalanceId', referencedColumnName: 'id' }])
     Balances: Balances;
+
+    @Column('int', { name: 'BalanceCategoryId', nullable: true })
+    BalanceCategoryId: number;
+
+    @ManyToOne(() => BalanceCategories, balanceCategory => balanceCategory.BalanceLikes, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    })
+    @JoinColumn([{ name: 'BalanceCategoryId', referencedColumnName: 'id' }])
+    BalanceCategories: BalanceCategories;
 }
