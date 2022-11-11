@@ -12,6 +12,13 @@ import { BalanceCounts } from '../entity/BalanceCounts.entity';
 import { Boards } from '../entity/Boards.entity';
 import { BoardLikes } from '../entity/BoardLikes.entity';
 import { Topics } from '../entity/Topics.entity';
+import { Comments } from '../entity/Comments.entity';
+import { Votes } from '../entity/Votes.entity';
+import { VoteLists } from '../entity/VoteLists.entity';
+import { VoteRecords } from '../entity/VoteRecords.entity';
+import { BalancesModule } from './balances/balances.module';
+import { BalanceCategories } from '../entity/BalanceCategories.entity';
+import { BoardsModule } from './boards/boards.module';
 
 @Module({
     imports: [
@@ -32,9 +39,14 @@ import { Topics } from '../entity/Topics.entity';
                         BalanceContents,
                         BalanceLikes,
                         BalanceCounts,
+                        BalanceCategories,
                         Boards,
                         BoardLikes,
                         Topics,
+                        Comments,
+                        Votes,
+                        VoteLists,
+                        VoteRecords,
                     ],
                     autoLoadEntities: true,
                     charset: 'utf8mb4',
@@ -45,6 +57,8 @@ import { Topics } from '../entity/Topics.entity';
             },
         }),
         OauthModule,
+        BalancesModule,
+        BoardsModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -22,24 +22,25 @@ export class OauthService {
             };
 
             const isUser = await this.findUser(newUser);
-
+            console.log(isUser);
             if (!isUser) {
-                await this.register(newUser);
+                const returnedUser = await this.register(newUser);
+                return await this.login(newUser, returnedUser);
             }
 
-            return await this.login(newUser);
+            return await this.login(newUser, isUser);
         } catch (e) {
             throw new Error(e);
         }
     }
 
-    async login(user) {
+    async login(user, newUser) {
         if (!user) throw new BadRequestException();
-        console.log('user info', user);
+        console.log('user info', newUser);
         return {
             accessToken: this.jwtService.sign(
                 {
-                    id: user.id,
+                    id: newUser.id,
                 },
                 {
                     secret: process.env.JWT_SECRET,

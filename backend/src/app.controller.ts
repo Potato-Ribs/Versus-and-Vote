@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('oauth 관련 API 입니다. 무시하셔도 됩니다.')
+@ApiTags('oauth 관련 API')
 @Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {}
