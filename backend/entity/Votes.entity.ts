@@ -4,6 +4,7 @@ import { Users } from './Users.entity';
 import { BoardLikes } from './BoardLikes.entity';
 import { VoteLists } from './VoteLists.entity';
 import { Comments } from './Comments.entity';
+import { VoteCategories } from './VoteCategory.entity';
 
 @Entity('votes')
 export class Votes {
@@ -34,4 +35,14 @@ export class Votes {
     })
     @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
     Users: Users;
+
+    @Column('int', { name: 'VoteCategoryId', nullable: true })
+    VoteCategoryId: number;
+
+    @ManyToOne(() => VoteCategories, voteCategory => voteCategory.Votes, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    })
+    @JoinColumn([{ name: 'VoteCategoryId', referencedColumnName: 'id' }])
+    VoteCategories: VoteCategories;
 }

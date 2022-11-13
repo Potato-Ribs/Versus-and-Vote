@@ -7,6 +7,7 @@ import { BoardLikes } from './BoardLikes.entity';
 import { Votes } from './Votes.entity';
 import { Comments } from './Comments.entity';
 import { VoteRecords } from './VoteRecords.entity';
+import { BoardComments } from './BoardComments.entity';
 
 @Entity('users')
 export class Users {
@@ -33,6 +34,9 @@ export class Users {
 
     @OneToMany(() => BalanceLikes, balanceLikes => balanceLikes.Users)
     BalanceLikes: BalanceLikes[];
+
+    @OneToMany(() => BoardComments, boardComments => boardComments.Users)
+    BoardComments: BoardComments[];
 
     @OneToMany(() => Boards, boards => boards.Users)
     Boards: Boards[];

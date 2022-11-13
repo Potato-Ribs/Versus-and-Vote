@@ -19,6 +19,9 @@ import { VoteRecords } from '../entity/VoteRecords.entity';
 import { BalancesModule } from './balances/balances.module';
 import { BalanceCategories } from '../entity/BalanceCategories.entity';
 import { BoardsModule } from './boards/boards.module';
+import { BoardComments } from '../entity/BoardComments.entity';
+import { VotesModule } from './votes/votes.module';
+import { VoteCategories } from '../entity/VoteCategory.entity';
 
 @Module({
     imports: [
@@ -42,11 +45,13 @@ import { BoardsModule } from './boards/boards.module';
                         BalanceCategories,
                         Boards,
                         BoardLikes,
+                        BoardComments,
                         Topics,
                         Comments,
                         Votes,
                         VoteLists,
                         VoteRecords,
+                        VoteCategories,
                     ],
                     autoLoadEntities: true,
                     charset: 'utf8mb4',
@@ -58,6 +63,7 @@ import { BoardsModule } from './boards/boards.module';
         OauthModule,
         BalancesModule,
         BoardsModule,
+        VotesModule,
     ],
     controllers: [AppController],
     providers: [AppService],
