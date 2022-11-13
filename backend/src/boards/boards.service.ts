@@ -73,4 +73,38 @@ export class BoardsService {
         }
         return await this.boardsRepository.unClickLikes(boardId, id);
     }
+
+    async createBoardComment(body, user) {
+        const { contents, boardId } = body;
+        const { id } = user;
+
+        return await this.boardsRepository.createBoardComment(contents, boardId, id);
+    }
+
+    async editBoardComment(body, param, user) {
+        const { contents } = body;
+        const boardCommentId = Number(param.boardCommentId);
+        const { id } = user;
+
+        const isBoardComment = await this.boardsRepository.findBoardComment(boardCommentId);
+
+        if (isBoardComment.UserId !== id) {
+            throw new BadRequestException('권한없음');
+        }
+
+        return await this.boardsRepository.editBoardComment(contents, boardCommentId);
+    }
+
+    async deleteBoardComment(param, user) {
+        const boardCommentId = Number(param.boardCommentId);
+        const { id } = user;
+
+        const isBoardComment = await this.boardsRepository.findBoardComment(boardCommentId);
+
+        if (isBoardComment.UserId !== id) {
+            throw new BadRequestException('권한없음');
+        }
+
+        return await this.boardsRepository.deleteBoardComment(boardCommentId);
+    }
 }

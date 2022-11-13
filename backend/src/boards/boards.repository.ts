@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Boards } from '../../entity/Boards.entity';
 import { Repository } from 'typeorm';
 import { BoardLikes } from '../../entity/BoardLikes.entity';
+import { BoardComments } from '../../entity/BoardComments.entity';
 
 @Injectable()
 export class BoardsRepository {
     constructor(
         @InjectRepository(Boards) private boardsRepository: Repository<Boards>,
         @InjectRepository(BoardLikes) private boardLikesRepository: Repository<BoardLikes>,
+        @InjectRepository(BoardComments) private boardCommentsRepository: Repository<BoardComments>,
     ) {}
 
     async createBoard(topicId, title, contents, id) {
@@ -21,12 +23,13 @@ export class BoardsRepository {
     }
 
     async getBoard(boardId) {
-        console.log(boardId);
         return await this.boardsRepository
             .createQueryBuilder('board')
             .where('board.id =:id', { id: boardId })
             .innerJoinAndSelect('board.Topics', 'topic')
             .innerJoinAndSelect('board.Users', 'user')
+            .leftJoinAndSelect('board.BoardComments', 'boardComment')
+            .leftJoinAndSelect('boardComment.Users', 'boardCommentUser')
             .leftJoin('board.BoardLikes', 'boardLike')
             .addSelect(['boardLike.id'])
             .getOne();
@@ -77,5 +80,27 @@ export class BoardsRepository {
                 'user.photo',
             ])
             .getMany();
+    }
+
+    async createBoardComment(contents, boardId, id) {
+        const newBoardComment = this.boardCommentsRepository.create();
+        newBoardComment.contents = contents;
+        newBoardComment.UserId = id;
+        newBoardComment.BoardId = boardId;
+        return await this.boardCommentsRepository.save(newBoardComment);
+    }
+
+    async findBoardComment(boardCommentId) {
+        return await this.boardCommentsRepository.findOne({ id: boardCommentId });
+    }
+
+    async editBoardComment(contents, boardCommentId) {
+        const isBoardComment = await this.boardCommentsRepository.findOne({ id: boardCommentId });
+        isBoardComment.contents = contents;
+        return await this.boardCommentsRepository.save(isBoardComment);
+    }
+
+    async deleteBoardComment(boardCommentId) {
+        return await this.boardCommentsRepository.delete({ id: boardCommentId });
     }
 }

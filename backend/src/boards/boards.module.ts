@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Boards } from '../../entity/Boards.entity';
 import { BoardLikes } from '../../entity/BoardLikes.entity';
 import { Topics } from '../../entity/Topics.entity';
+import { BoardComments } from '../../entity/BoardComments.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Boards, BoardLikes, Topics])],
+    imports: [TypeOrmModule.forFeature([Boards, BoardLikes, BoardComments, Topics])],
     controllers: [BoardsController],
     providers: [BoardsService, BoardsRepository],
 })

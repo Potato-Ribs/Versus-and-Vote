@@ -2,9 +2,10 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { BoardsService } from './boards.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../common/decorator/user.decorator';
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateBoardDto } from './dto/createBoard.dto';
 
+@ApiTags('자유게시판')
 @Controller('boards')
 export class BoardsController {
     constructor(private boardsService: BoardsService) {}
@@ -73,5 +74,41 @@ export class BoardsController {
     @UseGuards(AuthGuard('jwt'))
     async clickLike(@Body() body, @User() user) {
         return await this.boardsService.clickLike(body, user);
+    }
+
+    @ApiOperation({ summary: '자유게시글 댓글 작성하기' })
+    @ApiBearerAuth('access-token')
+    @Post('comment')
+    @UseGuards(AuthGuard('jwt'))
+    async createBoardComment(@Body() body, @User() user) {
+        return await this.boardsService.createBoardComment(body, user);
+    }
+
+    @ApiOperation({ summary: '특정 자유게시글 댓글 수정하기' })
+    @ApiBearerAuth('access-token')
+    @ApiParam({
+        name: 'boardCommentId',
+        example: '1',
+        description: '자유게시글 댓글 아이디',
+        required: true,
+    })
+    @Put(':boardCommentId')
+    @UseGuards(AuthGuard('jwt'))
+    async editBoardComment(@Param() param, @User() user, @Body() body) {
+        return await this.boardsService.editBoardComment(body, param, user);
+    }
+
+    @ApiOperation({ summary: '특정 자유게시글 댓글 삭제' })
+    @ApiBearerAuth('access-token')
+    @ApiParam({
+        name: 'boardCommentId',
+        example: '1',
+        description: '자유게시글 댓글 아이디',
+        required: true,
+    })
+    @Delete(':boardCommentId')
+    @UseGuards(AuthGuard('jwt'))
+    async deleteBoardComment(@Param() param, @User() user) {
+        return await this.boardsService.deleteBoardComment(param, user);
     }
 }

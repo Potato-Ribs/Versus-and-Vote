@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 import { Topics } from './Topics.entity';
 import { Users } from './Users.entity';
 import { BoardLikes } from './BoardLikes.entity';
+import { BoardComments } from './BoardComments.entity';
 
 @Entity('boards')
 export class Boards {
@@ -19,6 +20,9 @@ export class Boards {
 
     @OneToMany(() => BoardLikes, boardLikes => boardLikes.Boards)
     BoardLikes: BoardLikes[];
+
+    @OneToMany(() => BoardComments, boardComments => boardComments.Boards)
+    BoardComments: BoardComments[];
 
     @Column('int', { name: 'TopicId', nullable: true })
     TopicId: number;
