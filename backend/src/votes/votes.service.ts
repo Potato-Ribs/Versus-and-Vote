@@ -20,8 +20,7 @@ export class VotesService {
         return await this.votesRepository.getVoteList();
     }
 
-    async getVote(param, user) {
-        const voteId = Number(param.voteId);
+    async getVote(voteId: number, user) {
         const { id } = user;
 
         return await this.votesRepository.getVote(voteId);

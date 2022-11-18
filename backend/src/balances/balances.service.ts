@@ -29,8 +29,7 @@ export class BalancesService {
         return await this.balanceRepository.createBalanceCounts(balanceContentsId, id);
     }
 
-    async getBalance(param, user) {
-        const balanceId = Number(param.balanceId);
+    async getBalance(balanceId: number, user: { id: number }) {
         const { id } = user;
 
         // id 검증 해야함

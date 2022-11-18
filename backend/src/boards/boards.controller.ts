@@ -36,8 +36,8 @@ export class BoardsController {
     })
     @Get(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async getBoard(@Param() param, @User() user) {
-        return await this.boardsService.getBoard(param, user);
+    async getBoard(@Param('boardId') boardId: number, @User() user) {
+        return await this.boardsService.getBoard(boardId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 수정' })
@@ -50,8 +50,8 @@ export class BoardsController {
     })
     @Put(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async editBoard(@Param() param, @User() user, @Body() body) {
-        return await this.boardsService.editBoard(body, param, user);
+    async editBoard(@Param('boardId') boardId: number, @User() user, @Body() body) {
+        return await this.boardsService.editBoard(body, boardId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 삭제' })
@@ -64,8 +64,8 @@ export class BoardsController {
     })
     @Delete(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async deleteBoard(@Param() param, @User() user) {
-        return await this.boardsService.deleteBoard(param, user);
+    async deleteBoard(@Param('boardId') boardId: number, @User() user) {
+        return await this.boardsService.deleteBoard(boardId, user);
     }
 
     @ApiOperation({ summary: '자유게시글 좋아요' })
@@ -94,8 +94,8 @@ export class BoardsController {
     })
     @Put(':boardCommentId')
     @UseGuards(AuthGuard('jwt'))
-    async editBoardComment(@Param() param, @User() user, @Body() body) {
-        return await this.boardsService.editBoardComment(body, param, user);
+    async editBoardComment(@Param('boardCommentId') boardCommentId: number, @User() user, @Body() body) {
+        return await this.boardsService.editBoardComment(body, boardCommentId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 댓글 삭제' })
@@ -108,7 +108,7 @@ export class BoardsController {
     })
     @Delete(':boardCommentId')
     @UseGuards(AuthGuard('jwt'))
-    async deleteBoardComment(@Param() param, @User() user) {
-        return await this.boardsService.deleteBoardComment(param, user);
+    async deleteBoardComment(@Param('boardCommentId') boardCommentId: number, @User() user) {
+        return await this.boardsService.deleteBoardComment(boardCommentId, user);
     }
 }

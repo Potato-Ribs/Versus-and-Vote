@@ -24,13 +24,13 @@ export class BalancesController {
         return await this.balanceService.clickContents(body, user);
     }
 
-    // @ApiOperation({ summary: '밸런스 게임 모든 리스트 불러오기' })
-    // @ApiBearerAuth('access-token')
-    // @Get('list')
-    // @UseGuards(AuthGuard('jwt'))
-    // async getBalanceList(@User() user) {
-    //     return await this.balanceService.getBalanceList(user);
-    // }
+    @ApiOperation({ summary: '밸런스 게임 모든 리스트 불러오기' })
+    @ApiBearerAuth('access-token')
+    @Get('list')
+    @UseGuards(AuthGuard('jwt'))
+    async getBalanceList(@User() user) {
+        return await this.balanceService.getBalanceList(user);
+    }
 
     @ApiOperation({ summary: '특정 밸런스게임 불러오기' })
     @ApiBearerAuth('access-token')
@@ -42,8 +42,8 @@ export class BalancesController {
     })
     @Get(':balanceId')
     @UseGuards(AuthGuard('jwt'))
-    async getBalance(@Param() param, @User() user) {
-        return await this.balanceService.getBalance(param, user);
+    async getBalance(@Param('balanceId') balanceId: number, @User() user) {
+        return await this.balanceService.getBalance(balanceId, user);
     }
 
     @ApiOperation({ summary: '밸런스게임 좋아요 클릭하기' })

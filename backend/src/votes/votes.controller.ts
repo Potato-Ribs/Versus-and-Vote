@@ -35,8 +35,8 @@ export class VotesController {
     })
     @Get(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async getVote(@Param() param, @User() user) {
-        return await this.votesService.getVote(param, user);
+    async getVote(@Param('voteId') voteId: number, @User() user) {
+        return await this.votesService.getVote(voteId, user);
     }
 
     @ApiOperation({ summary: '투표하기!' })
