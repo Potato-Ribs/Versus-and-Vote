@@ -38,4 +38,12 @@ export class VotesController {
     async getVote(@Param() param, @User() user) {
         return await this.votesService.getVote(param, user);
     }
+
+    @ApiOperation({ summary: '투표하기!' })
+    @ApiBearerAuth('access-token')
+    @Post('click')
+    @UseGuards(AuthGuard('jwt'))
+    async clickVote(@Body() body, @User() user) {
+        return await this.votesService.clickVote(body, user);
+    }
 }
