@@ -40,4 +40,16 @@ export class VotesService {
 
         return await this.votesRepository.createVoteRecord(voteListId, id);
     }
+
+    async deleteVote(voteId, user) {
+        const { id } = user;
+
+        const isVote = await this.votesRepository.findVoteByUserId(voteId, id);
+
+        if (!isVote) {
+            throw new BadRequestException('삭제 권한이없음');
+        }
+
+        return await this.votesRepository.deleteVote(voteId);
+    }
 }

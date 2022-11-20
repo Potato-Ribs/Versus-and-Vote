@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { VotesService } from './votes.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../common/decorator/user.decorator';
@@ -33,7 +33,7 @@ export class VotesController {
         description: '투표게시글 아이디',
         required: true,
     })
-    @Get(':boardId')
+    @Get(':voteId')
     @UseGuards(AuthGuard('jwt'))
     async getVote(@Param('voteId') voteId: number, @User() user) {
         return await this.votesService.getVote(voteId, user);
@@ -45,5 +45,11 @@ export class VotesController {
     @UseGuards(AuthGuard('jwt'))
     async clickVote(@Body() body, @User() user) {
         return await this.votesService.clickVote(body, user);
+    }
+
+    @Delete(':voteId')
+    @UseGuards(AuthGuard('jwt'))
+    async deleteVote(@Param('voteId') voteId: number, @User() user) {
+        return await this.votesService.deleteVote(voteId, user);
     }
 }

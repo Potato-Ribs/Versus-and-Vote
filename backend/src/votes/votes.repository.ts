@@ -83,4 +83,12 @@ export class VotesRepository {
         newVoteRecord.UserId = id;
         return await this.voteRecordsRepository.save(newVoteRecord);
     }
+
+    async deleteVote(voteId) {
+        return await this.votesRepository.delete({ id: voteId });
+    }
+
+    async findVoteByUserId(voteId, id) {
+        return await this.votesRepository.findOne({ UserId: id, id: voteId });
+    }
 }
