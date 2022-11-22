@@ -14,7 +14,7 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @Post()
     @UseGuards(AuthGuard('jwt'))
-    async createBoard(@Body() body: CreateBoardDto, @User() user) {
+    async createBoard(@Body() body: CreateBoardDto, @User() user: { id: number }) {
         return await this.boardsService.createBoard(body, user);
     }
 
@@ -22,7 +22,7 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @Get('list')
     @UseGuards(AuthGuard('jwt'))
-    async getBoardList(@User() user) {
+    async getBoardList(@User() user: { id: number }) {
         return await this.boardsService.getBoardList(user);
     }
 
@@ -36,8 +36,8 @@ export class BoardsController {
     })
     @Get(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async getBoard(@Param() param, @User() user) {
-        return await this.boardsService.getBoard(param, user);
+    async getBoard(@Param('boardId') boardId: number, @User() user: { id: number }) {
+        return await this.boardsService.getBoard(boardId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 수정' })
@@ -50,8 +50,8 @@ export class BoardsController {
     })
     @Put(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async editBoard(@Param() param, @User() user, @Body() body) {
-        return await this.boardsService.editBoard(body, param, user);
+    async editBoard(@Param('boardId') boardId: number, @User() user: { id: number }, @Body() body) {
+        return await this.boardsService.editBoard(body, boardId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 삭제' })
@@ -64,15 +64,15 @@ export class BoardsController {
     })
     @Delete(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async deleteBoard(@Param() param, @User() user) {
-        return await this.boardsService.deleteBoard(param, user);
+    async deleteBoard(@Param('boardId') boardId: number, @User() user: { id: number }) {
+        return await this.boardsService.deleteBoard(boardId, user);
     }
 
     @ApiOperation({ summary: '자유게시글 좋아요' })
     @ApiBearerAuth('access-token')
     @Post('like')
     @UseGuards(AuthGuard('jwt'))
-    async clickLike(@Body() body, @User() user) {
+    async clickLike(@Body() body, @User() user: { id: number }) {
         return await this.boardsService.clickLike(body, user);
     }
 
@@ -80,7 +80,7 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @Post('comment')
     @UseGuards(AuthGuard('jwt'))
-    async createBoardComment(@Body() body, @User() user) {
+    async createBoardComment(@Body() body, @User() user: { id: number }) {
         return await this.boardsService.createBoardComment(body, user);
     }
 
@@ -88,27 +88,31 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @ApiParam({
         name: 'boardCommentId',
-        example: '1',
+        example: 1,
         description: '자유게시글 댓글 아이디',
         required: true,
     })
     @Put(':boardCommentId')
     @UseGuards(AuthGuard('jwt'))
-    async editBoardComment(@Param() param, @User() user, @Body() body) {
-        return await this.boardsService.editBoardComment(body, param, user);
+    async editBoardComment(
+        @Param('boardCommentId') boardCommentId: number,
+        @User() user: { id: number },
+        @Body() body,
+    ) {
+        return await this.boardsService.editBoardComment(body, boardCommentId, user);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 댓글 삭제' })
     @ApiBearerAuth('access-token')
     @ApiParam({
         name: 'boardCommentId',
-        example: '1',
+        example: 1,
         description: '자유게시글 댓글 아이디',
         required: true,
     })
     @Delete(':boardCommentId')
     @UseGuards(AuthGuard('jwt'))
-    async deleteBoardComment(@Param() param, @User() user) {
-        return await this.boardsService.deleteBoardComment(param, user);
+    async deleteBoardComment(@Param('boardCommentId') boardCommentId: number, @User() user: { id: number }) {
+        return await this.boardsService.deleteBoardComment(boardCommentId, user);
     }
 }

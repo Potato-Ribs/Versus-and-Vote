@@ -15,8 +15,7 @@ export class BoardsService {
         return await this.boardsRepository.createBoard(topicId, title, contents, id);
     }
 
-    async getBoard(param, user) {
-        const boardId = Number(param.boardId);
+    async getBoard(boardId: number, user) {
         const { id } = user;
 
         // 유저 체크
@@ -37,10 +36,9 @@ export class BoardsService {
         return await this.boardsRepository.getBoardList();
     }
 
-    async editBoard(body, param, user) {
+    async editBoard(body, boardId: number, user) {
         const { topicId, title, contents } = body;
         const { id } = user;
-        const boardId = Number(param.boardId);
 
         const isBoard = await this.boardsRepository.getBoardByBoardId(boardId);
         if (isBoard.id !== boardId) {
@@ -50,9 +48,8 @@ export class BoardsService {
         return await this.boardsRepository.editBoard(topicId, title, contents, isBoard);
     }
 
-    async deleteBoard(param, user) {
+    async deleteBoard(boardId: number, user) {
         const { id } = user;
-        const boardId = Number(param.boardId);
 
         const isBoard = await this.boardsRepository.getBoardByBoardId(boardId);
         if (isBoard.id !== boardId) {
@@ -81,9 +78,9 @@ export class BoardsService {
         return await this.boardsRepository.createBoardComment(contents, boardId, id);
     }
 
-    async editBoardComment(body, param, user) {
+    async editBoardComment(body, boardCommentId: number, user) {
         const { contents } = body;
-        const boardCommentId = Number(param.boardCommentId);
+
         const { id } = user;
 
         const isBoardComment = await this.boardsRepository.findBoardComment(boardCommentId);
@@ -95,8 +92,7 @@ export class BoardsService {
         return await this.boardsRepository.editBoardComment(contents, boardCommentId);
     }
 
-    async deleteBoardComment(param, user) {
-        const boardCommentId = Number(param.boardCommentId);
+    async deleteBoardComment(boardCommentId: number, user) {
         const { id } = user;
 
         const isBoardComment = await this.boardsRepository.findBoardComment(boardCommentId);
