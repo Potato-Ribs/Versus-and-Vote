@@ -1,20 +1,23 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { BalancesRepository } from './balances.repository';
+import { ClickBalance } from './dto/clickBalanceContents.dto';
+import { ClickBalanceLike } from './dto/clickBalanceLike.dto';
+import { CreateBalanceAndContents } from './dto/createBalanceAndContents.dto';
 
 @Injectable()
 export class BalancesService {
     constructor(protected balanceRepository: BalancesRepository) {}
 
-    async createBalanceAndContents(body, user) {
-        const { left, right } = body;
+    async createBalanceAndContents(body: CreateBalanceAndContents, user: { id: number }) {
+        const { left, right, title } = body;
         const { id } = user;
 
         // id 검증 해야함
 
-        return await this.balanceRepository.createBalanceAndContents(id, left, right);
+        return await this.balanceRepository.createBalanceAndContents(id, left, right, title);
     }
 
-    async clickContents(body, user) {
+    async clickContents(body: ClickBalance, user: { id: number }) {
         const { balanceContentsId } = body;
         const { id } = user;
 
@@ -33,9 +36,13 @@ export class BalancesService {
         const { id } = user;
 
         // id 검증 해야함
-        console.log(balanceId);
 
         let isBalance = await this.balanceRepository.getBalance(balanceId);
+
+        if (!isBalance) {
+            throw new BadRequestException('삭제된 게시글입니다');
+        }
+
         // @ts-ignore
         isBalance.BalanceContents[0].BalanceCounts = isBalance.BalanceContents[0].BalanceCounts.length;
         // @ts-ignore
@@ -43,7 +50,7 @@ export class BalancesService {
         return isBalance;
     }
 
-    async clickLikes(body, user) {
+    async clickLikes(body: ClickBalanceLike, user: { id: number }) {
         const { balanceId, categoryId } = body;
         const { id } = user;
 
@@ -55,12 +62,17 @@ export class BalancesService {
         return await this.balanceRepository.unClickLikes(balanceId, categoryId, id);
     }
 
-    async getBalanceList(user) {
+    async getBalanceList(user: { id: number }) {
         const { id } = user;
 
         //id 검증 필ㄷ요
 
         const isBalanceList = await this.balanceRepository.getBalanceList();
+
+        if (!isBalanceList.length) {
+            return isBalanceList;
+        }
+
         const count =
             isBalanceList[0].BalanceContents[0].BalanceCounts.length +
             isBalanceList[0].BalanceContents[1].BalanceCounts.length;
@@ -72,5 +84,17 @@ export class BalancesService {
         // @ts-ignore
         isBalanceList[0].BalanceContents.push({ totalCount: count });
         return isBalanceList;
+    }
+
+    async deleteBalance(balanceId: number, user: { id: number }) {
+        const { id } = user;
+
+        const isBalane = await this.balanceRepository.getBalance(balanceId);
+
+        if (isBalane.UserId !== id) {
+            throw new BadRequestException('권한이 없음');
+        }
+
+        return await this.balanceRepository.deleteBalance(balanceId);
     }
 }

@@ -16,13 +16,13 @@ export class BalancesRepository {
         private connection: Connection,
     ) {}
 
-    async createBalanceAndContents(id, left, right) {
+    async createBalanceAndContents(id: number, left: string, right: string, title: string) {
         const queryRunner = this.connection.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
 
         try {
-            const { id: balanceId } = await this.createBalance(id);
+            const { id: balanceId } = await this.createBalance(id, title);
             await this.createBalanceContents(balanceId, left, 'left');
             await this.createBalanceContents(balanceId, right, 'right');
 
@@ -37,8 +37,9 @@ export class BalancesRepository {
         }
     }
 
-    async createBalance(id: number) {
+    async createBalance(id: number, title: string) {
         const newBalance = this.balanceRepository.create();
+        newBalance.title = title;
         newBalance.UserId = id;
         return await this.balanceRepository.save(newBalance);
     }
@@ -71,7 +72,7 @@ export class BalancesRepository {
         return 'ok';
     }
 
-    async checkClickable(id) {
+    async checkClickable(id: number) {
         return await this.balanceCountsRepository
             .createQueryBuilder('balanceCount')
             .where('balanceCount.UserId =:id', { id })
@@ -79,7 +80,7 @@ export class BalancesRepository {
             .getOne();
     }
 
-    async checkLikable(balanceId, categoryId, id) {
+    async checkLikable(balanceId: number, categoryId: number, id: number) {
         return await this.balanceLikesRepository.findOne({
             BalanceId: balanceId,
             BalanceCategoryId: categoryId,
@@ -96,7 +97,7 @@ export class BalancesRepository {
         return 'like ok';
     }
 
-    async unClickLikes(balanceId, categoryId, id) {
+    async unClickLikes(balanceId: number, categoryId: number, id: number) {
         await this.balanceLikesRepository.delete({
             BalanceId: balanceId,
             BalanceCategoryId: categoryId,
@@ -112,5 +113,9 @@ export class BalancesRepository {
             .innerJoin('balanceContent.BalanceCounts', 'balanceCount')
             .select(['balance.id', 'balance.title', 'balanceContent.title', 'balanceContent.type', 'balanceCount.id'])
             .getMany();
+    }
+
+    async deleteBalance(balanceId: number) {
+        return await this.balanceRepository.delete({ id: balanceId });
     }
 }

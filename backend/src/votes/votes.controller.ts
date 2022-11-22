@@ -47,6 +47,14 @@ export class VotesController {
         return await this.votesService.clickVote(body, user);
     }
 
+    @ApiOperation({ summary: '투표게시글 삭제하기!' })
+    @ApiBearerAuth('access-token')
+    @ApiParam({
+        name: 'voteId',
+        example: '1',
+        description: '투표게시글 아이디',
+        required: true,
+    })
     @Delete(':voteId')
     @UseGuards(AuthGuard('jwt'))
     async deleteVote(@Param('voteId') voteId: number, @User() user) {
