@@ -27,7 +27,7 @@ export class BalancesRepository {
             await this.createBalanceContents(balanceId, right, 'right');
 
             await queryRunner.commitTransaction();
-            return;
+            return 'ok';
         } catch (error) {
             console.error(error);
             await queryRunner.rollbackTransaction();
@@ -57,8 +57,10 @@ export class BalancesRepository {
             .createQueryBuilder('balance')
             .where('balance.id =:id', { id: balanceId })
             .innerJoinAndSelect('balance.BalanceContents', 'balanceContent')
-            .innerJoin('balanceContent.BalanceCounts', 'balanceCount')
+            .leftJoin('balanceContent.BalanceCounts', 'balanceCount')
             .innerJoinAndSelect('balance.Users', 'user')
+            .leftJoinAndSelect('balance.BalanceLikes', 'balanceLike')
+            .leftJoinAndSelect('balanceLike.BalanceCategories', 'balanceCategory')
             .addSelect(['balanceCount.id'])
 
             .getOne();
@@ -110,7 +112,7 @@ export class BalancesRepository {
         return await this.balanceRepository
             .createQueryBuilder('balance')
             .innerJoin('balance.BalanceContents', 'balanceContent')
-            .innerJoin('balanceContent.BalanceCounts', 'balanceCount')
+            .leftJoin('balanceContent.BalanceCounts', 'balanceCount')
             .select(['balance.id', 'balance.title', 'balanceContent.title', 'balanceContent.type', 'balanceCount.id'])
             .getMany();
     }
