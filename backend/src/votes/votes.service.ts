@@ -23,7 +23,14 @@ export class VotesService {
     async getVote(voteId: number, user) {
         const { id } = user;
 
-        return await this.votesRepository.getVote(voteId);
+        const isVote = await this.votesRepository.getVote(voteId);
+
+        for (let i = 0; i < isVote['VoteLists'].length; i++) {
+            const count = isVote['VoteLists'][i]['VoteRecords'].length;
+            isVote['VoteLists'][i]['count'] = count;
+        }
+
+        return isVote;
     }
 
     async clickVote(body, user) {

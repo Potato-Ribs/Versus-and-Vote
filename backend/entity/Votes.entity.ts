@@ -14,9 +14,6 @@ export class Votes {
     @Column('varchar', { name: 'title' })
     title: string;
 
-    @Column('varchar', { name: 'contents' })
-    contents: string;
-
     @CreateDateColumn()
     createdAt: Date;
 

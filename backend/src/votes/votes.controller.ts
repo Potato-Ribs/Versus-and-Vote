@@ -3,6 +3,8 @@ import { VotesService } from './votes.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../common/decorator/user.decorator';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { CreateVoteDto } from './dto/createVote.dto';
+import { ClickVoteDto } from './dto/clickVote.dto';
 
 @ApiTags('투표게시판')
 @Controller('votes')
@@ -13,7 +15,7 @@ export class VotesController {
     @ApiBearerAuth('access-token')
     @Post()
     @UseGuards(AuthGuard('jwt'))
-    async createVote(@Body() body, @User() user) {
+    async createVote(@Body() body: CreateVoteDto, @User() user) {
         return await this.votesService.createVote(body, user);
     }
 
@@ -43,7 +45,7 @@ export class VotesController {
     @ApiBearerAuth('access-token')
     @Post('click')
     @UseGuards(AuthGuard('jwt'))
-    async clickVote(@Body() body, @User() user) {
+    async clickVote(@Body() body: ClickVoteDto, @User() user) {
         return await this.votesService.clickVote(body, user);
     }
 
