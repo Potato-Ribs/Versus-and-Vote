@@ -4,6 +4,10 @@ import { AuthGuard } from '@nestjs/passport';
 import { User } from '../common/decorator/user.decorator';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateBoardDto } from './dto/createBoard.dto';
+import { LikeBoardDto } from './dto/likeBoard.dto';
+import { UpdateBoardDto } from './dto/updateBoard.dto';
+import { CreateCommentBoardDto } from './dto/createCommentBoard.dto';
+import { UpdateCommentBoardDto } from './dto/updateCommentBoard.dto';
 
 @ApiTags('자유게시판')
 @Controller('boards')
@@ -45,13 +49,13 @@ export class BoardsController {
     @ApiParam({
         name: 'boardId',
         example: '2',
-        description: '밸런스게임 아이디',
+        description: '자유게시글 아이디',
         required: true,
     })
     @Put(':boardId')
     @UseGuards(AuthGuard('jwt'))
-    async editBoard(@Param('boardId') boardId: number, @User() user: { id: number }, @Body() body) {
-        return await this.boardsService.editBoard(body, boardId, user);
+    async editBoard(@Param('boardId') boardId: number, @User() user: { id: number }, @Body() body: UpdateBoardDto) {
+        return await this.boardsService.editBoard(boardId, user, body);
     }
 
     @ApiOperation({ summary: '특정 자유게시글 삭제' })
@@ -72,7 +76,7 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @Post('like')
     @UseGuards(AuthGuard('jwt'))
-    async clickLike(@Body() body, @User() user: { id: number }) {
+    async clickLike(@Body() body: LikeBoardDto, @User() user: { id: number }) {
         return await this.boardsService.clickLike(body, user);
     }
 
@@ -80,7 +84,7 @@ export class BoardsController {
     @ApiBearerAuth('access-token')
     @Post('comment')
     @UseGuards(AuthGuard('jwt'))
-    async createBoardComment(@Body() body, @User() user: { id: number }) {
+    async createBoardComment(@Body() body: CreateCommentBoardDto, @User() user: { id: number }) {
         return await this.boardsService.createBoardComment(body, user);
     }
 
@@ -92,12 +96,12 @@ export class BoardsController {
         description: '자유게시글 댓글 아이디',
         required: true,
     })
-    @Put(':boardCommentId')
+    @Put('comment/:boardCommentId')
     @UseGuards(AuthGuard('jwt'))
     async editBoardComment(
         @Param('boardCommentId') boardCommentId: number,
         @User() user: { id: number },
-        @Body() body,
+        @Body() body: UpdateCommentBoardDto,
     ) {
         return await this.boardsService.editBoardComment(body, boardCommentId, user);
     }
@@ -110,7 +114,7 @@ export class BoardsController {
         description: '자유게시글 댓글 아이디',
         required: true,
     })
-    @Delete(':boardCommentId')
+    @Delete('comment/:boardCommentId')
     @UseGuards(AuthGuard('jwt'))
     async deleteBoardComment(@Param('boardCommentId') boardCommentId: number, @User() user: { id: number }) {
         return await this.boardsService.deleteBoardComment(boardCommentId, user);

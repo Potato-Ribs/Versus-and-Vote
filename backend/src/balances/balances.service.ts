@@ -73,16 +73,21 @@ export class BalancesService {
             return isBalanceList;
         }
 
-        const count =
-            isBalanceList[0].BalanceContents[0].BalanceCounts.length +
-            isBalanceList[0].BalanceContents[1].BalanceCounts.length;
+        for (let i = 0; i < isBalanceList.length; i++) {
+            const count =
+                isBalanceList[i].BalanceContents[0].BalanceCounts.length +
+                isBalanceList[i].BalanceContents[1].BalanceCounts.length;
 
-        // @ts-ignore
-        isBalanceList[0].BalanceContents[0].BalanceCounts = isBalanceList[0].BalanceContents[0].BalanceCounts.length;
-        // @ts-ignore
-        isBalanceList[0].BalanceContents[1].BalanceCounts = isBalanceList[0].BalanceContents[1].BalanceCounts.length;
-        // @ts-ignore
-        isBalanceList[0].BalanceContents.push({ totalCount: count });
+            // @ts-ignore
+            isBalanceList[i].BalanceContents[0].BalanceCounts =
+                isBalanceList[i].BalanceContents[0].BalanceCounts.length;
+            // @ts-ignore
+            isBalanceList[i].BalanceContents[1].BalanceCounts =
+                isBalanceList[i].BalanceContents[1].BalanceCounts.length;
+            // @ts-ignore"
+            isBalanceList[i]['totalCount'] = count;
+        }
+
         return isBalanceList;
     }
 

@@ -6,7 +6,7 @@ import { CreateBoardDto } from './dto/createBoard.dto';
 export class BoardsService {
     constructor(private boardsRepository: BoardsRepository) {}
 
-    async createBoard(body: CreateBoardDto, user) {
+    async createBoard(body: CreateBoardDto, user: { id: number }) {
         const { topicId, title, contents } = body;
         const { id } = user;
 
@@ -36,7 +36,7 @@ export class BoardsService {
         return await this.boardsRepository.getBoardList();
     }
 
-    async editBoard(body, boardId: number, user) {
+    async editBoard(boardId: number, user, body) {
         const { topicId, title, contents } = body;
         const { id } = user;
 

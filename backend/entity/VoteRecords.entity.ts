@@ -9,9 +9,6 @@ export class VoteRecords {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
     id: number;
 
-    @Column('varchar', { name: 'title' })
-    title: string;
-
     @Column('int', { name: 'VoteListId', nullable: true })
     VoteListId: number;
 
